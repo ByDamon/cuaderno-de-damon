@@ -697,6 +697,59 @@ a:hover {
   color: #fbf3e6;
 }
 
+/* ---------- Vista previa al pasar el cursor ---------- */
+.vista-previa {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  width: 270px;
+  max-width: calc(100vw - 24px);
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  box-shadow: 0 16px 32px -14px var(--sombra);
+  padding: 14px 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.vista-previa--visible {
+  opacity: 1;
+}
+
+.vista-previa__categoria {
+  margin: 0 0 6px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--color-cat, var(--acento));
+}
+
+.vista-previa__titulo {
+  margin: 0 0 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: var(--tinta);
+}
+
+.vista-previa__resumen {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+  line-height: 1.4;
+}
+
+.vista-previa__meta {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--tinta-suave);
+  font-style: italic;
+}
+
 /* ---------- Mapa de conexiones ---------- */
 .mapa__titulo {
   font-family: var(--fuente-titulo);

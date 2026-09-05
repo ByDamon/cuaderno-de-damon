@@ -115,6 +115,32 @@ module.exports = function (eleventyConfig) {
     return { nodes, edges };
   });
 
+  eleventyConfig.addCollection("vistaPrevia", (collectionApi) => {
+    const entradas = collectionApi.getFilteredByGlob("src/entradas/*.md");
+    const mapa = {};
+
+    entradas.forEach((e) => {
+      const cat = buscarCategoria(e.data.categoria);
+      const total =
+        contarPalabras(e.data.explicacion) +
+        contarPalabras(e.data.analogia) +
+        contarPalabras(e.data.puente) +
+        contarPalabras(e.data.reflexion);
+      const minutos = Math.max(1, Math.round(total / 200));
+
+      mapa[e.url] = {
+        titulo: e.data.title,
+        resumen: e.data.resumen || "",
+        emoji: cat.emoji,
+        nombre: cat.nombre,
+        color: cat.color,
+        minutos: minutos,
+      };
+    });
+
+    return mapa;
+  });
+
   return {
     dir: {
       input: "src",
