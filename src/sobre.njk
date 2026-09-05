@@ -1,0 +1,45 @@
+---
+layout: layouts/base.njk
+titulo: Sobre este cuaderno — Cuaderno de Damon
+permalink: /sobre/
+---
+<section class="sobre">
+  <h1 class="sobre__titulo">Sobre este cuaderno</h1>
+
+  <p>
+    Esta libreta no es un diario. Tampoco un apunte de clase.<br>
+    Es mi enciclopedia viva: un lugar donde las ideas sobre ciencia, medicina,
+    universo y asombro se quedan a vivir.
+  </p>
+
+  <p>
+    No escribo para nadie más que para mi yo del futuro. El que volverá a estas
+    páginas dentro de meses o años y preguntará: <em>«¿Qué sentía cuando aprendí esto?»</em>
+  </p>
+
+  <p>Cada idea tiene:</p>
+  <ul class="sobre__lista">
+    <li>Una forma simple de explicarla.</li>
+    <li>Un dibujo mental (una analogía).</li>
+    <li>Un puente con otro tema.</li>
+    <li>Y al final, una pregunta o reflexión que me haga pensar más allá.</li>
+  </ul>
+
+  <p>Los colores no son decoración. Son mi mapa:</p>
+  <ul class="sobre__mapa">
+    {% for cat in categorias %}
+    <li style="--color-cat: {{ cat.color }};">{{ cat.emoji }} {{ cat.nombre }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2 class="sobre__subtitulo">¿Por qué hago esto?</h2>
+  <p>
+    Porque vivimos ahogados en información instantánea pero sedientos de
+    conocimiento pausado. Porque escribir despacio es pensar más despacio.
+    Porque quiero que mi curiosidad no se pierda en el ruido.
+  </p>
+  <p>
+    Si dentro de diez años abro este cuaderno y alguna idea todavía me hace
+    sonreír o dudar, entonces habrá cumplido su misión.
+  </p>
+</section>

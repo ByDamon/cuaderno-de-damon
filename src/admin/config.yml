@@ -1,0 +1,55 @@
+backend:
+  name: github
+  repo: ByDamon/cuaderno-de-damon
+  branch: main
+
+# Guarda los cambios directamente al hacer clic en "Publicar" dentro del panel.
+publish_mode: simple
+media_folder: "src/img"
+public_folder: "/img"
+
+collections:
+  - name: "entradas"
+    label: "Entradas"
+    label_singular: "Entrada"
+    folder: "src/entradas"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} — {{fields.categoria}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - label: "Categoría"
+        name: "categoria"
+        widget: "select"
+        options:
+          - { label: "🟣 Medicina", value: "medicina" }
+          - { label: "🔵 Universo", value: "universo" }
+          - { label: "🟢 Ciencia general", value: "ciencia" }
+          - { label: "🟡 Reflexiones", value: "reflexiones" }
+          - { label: "🟠 Tecnología y futuro", value: "tecnologia" }
+      - label: "Fecha"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        picker_utc: true
+      - { label: "Resumen (para la tarjeta)", name: "resumen", widget: "string" }
+      - { label: "Explicación simple", name: "explicacion", widget: "markdown", minimal: true }
+      - { label: "Dibujo mental (analogía)", name: "analogia", widget: "markdown", minimal: true }
+      - { label: "Puente con otro tema", name: "puente", widget: "markdown", minimal: true }
+      - { label: "Para seguir pensando", name: "reflexion", widget: "text" }
+      - { label: "Etiquetas", name: "tags", widget: "list", required: false }
+      - {
+          label: "Notas adicionales (opcional)",
+          name: "body",
+          widget: "markdown",
+          required: false,
+          minimal: true,
+        }
+      - {
+          label: "Layout",
+          name: "layout",
+          widget: "hidden",
+          default: "layouts/entrada.njk",
+        }

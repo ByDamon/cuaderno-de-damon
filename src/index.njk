@@ -1,0 +1,35 @@
+---
+layout: layouts/base.njk
+titulo: Cuaderno de Damon — Portada
+---
+<section class="portada">
+  <p class="portada__intro">
+    Esta libreta no es un diario ni un apunte de clase. Es una enciclopedia viva:
+    un lugar donde las ideas sobre ciencia, medicina, universo y asombro se quedan
+    a vivir. No escribo para nadie más que para mi yo del futuro — el que vuelva
+    a estas páginas dentro de meses o años.
+  </p>
+  <ul class="portada__mapa">
+    {% for cat in categorias %}
+    <li style="--color-cat: {{ cat.color }};"><a href="/entradas/?categoria={{ cat.slug }}">{{ cat.emoji }} {{ cat.nombre }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="ultimas">
+  <h2 class="ultimas__titulo">Últimas páginas escritas</h2>
+  <div class="tarjetas">
+    {% for entrada in collections.entradas %}
+      {% if loop.index <= 4 %}
+      {% set cat = entrada.data.categoria | categoriaInfo %}
+      <a class="tarjeta" href="{{ entrada.url }}" style="--color-cat: {{ cat.color }}; --color-cat-suave: {{ cat.colorSuave }};">
+        <p class="tarjeta__categoria">{{ cat.emoji }} {{ cat.nombre }}</p>
+        <h3 class="tarjeta__titulo" style="view-transition-name: titulo-{{ entrada.fileSlug }};">{{ entrada.data.title }}</h3>
+        <p class="tarjeta__resumen">{{ entrada.data.resumen }}</p>
+        <p class="tarjeta__fecha">{{ entrada.data.date | fechaCorta }}</p>
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <p class="ultimas__ver-todas"><a href="/entradas/">Ver el índice completo →</a></p>
+</section>

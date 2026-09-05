@@ -1,0 +1,79 @@
+---
+layout: layouts/base.njk
+titulo: Índice de entradas — Cuaderno de Damon
+permalink: /entradas/
+---
+<section class="indice">
+  <h1 class="indice__titulo">Índice de entradas</h1>
+
+  <div class="filtros" role="group" aria-label="Filtrar por categoría">
+    <button class="filtro filtro--activo" data-categoria="todas">Todas</button>
+    {% for cat in categorias %}
+    <button class="filtro" data-categoria="{{ cat.slug }}" style="--color-cat: {{ cat.color }};">{{ cat.emoji }} {{ cat.nombre }}</button>
+    {% endfor %}
+  </div>
+
+  <ul class="lista-entradas">
+    {% for entrada in collections.entradas %}
+    {% set cat = entrada.data.categoria | categoriaInfo %}
+    <li class="lista-entradas__item" data-categoria="{{ cat.slug }}" style="--color-cat: {{ cat.color }};">
+      <a href="{{ entrada.url }}">
+        <span class="lista-entradas__titulo" style="view-transition-name: titulo-{{ entrada.fileSlug }};">{{ entrada.data.title }}</span>
+        <span class="lista-entradas__meta">
+          <span class="lista-entradas__categoria">{{ cat.emoji }} {{ cat.nombre }}</span>
+          <span class="lista-entradas__fecha">{{ entrada.data.date | fechaCorta }}</span>
+        </span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<script>
+  (function () {
+    var lista = document.querySelector(".lista-entradas");
+    var botones = document.querySelectorAll(".filtro");
+    var items = document.querySelectorAll(".lista-entradas__item");
+
+    function revelar(categoria) {
+      var visibles = 0;
+      items.forEach(function (item) {
+        var coincide = categoria === "todas" || item.dataset.categoria === categoria;
+        item.style.display = coincide ? "" : "none";
+        item.classList.remove("lista-entradas__item--entra");
+        if (coincide) {
+          item.style.animationDelay = visibles * 0.035 + "s";
+          visibles += 1;
+          void item.offsetWidth;
+          item.classList.add("lista-entradas__item--entra");
+        }
+      });
+    }
+
+    function filtrar(categoria, instantaneo) {
+      botones.forEach(function (b) {
+        b.classList.toggle("filtro--activo", b.dataset.categoria === categoria);
+      });
+
+      if (instantaneo) {
+        revelar(categoria);
+        return;
+      }
+
+      lista.classList.add("lista-entradas--filtrando");
+      window.setTimeout(function () {
+        revelar(categoria);
+        lista.classList.remove("lista-entradas--filtrando");
+      }, 150);
+    }
+
+    botones.forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        filtrar(boton.dataset.categoria, false);
+      });
+    });
+
+    var params = new URLSearchParams(window.location.search);
+    filtrar(params.get("categoria") || "todas", true);
+  })();
+</script>

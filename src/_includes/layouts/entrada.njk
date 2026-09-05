@@ -1,0 +1,59 @@
+---
+layout: layouts/base.njk
+---
+{% set cat = categoria | categoriaInfo %}
+<article class="hoja" style="--color-cat: {{ cat.color }}; --color-cat-suave: {{ cat.colorSuave }};">
+  <p class="hoja__volver"><a href="/entradas/">← volver al índice</a></p>
+
+  <header class="hoja__cabecera">
+    <p class="hoja__categoria">
+      <a href="/entradas/?categoria={{ cat.slug }}">{{ cat.emoji }} {{ cat.nombre }}</a>
+    </p>
+    <h1 class="hoja__titulo" style="view-transition-name: titulo-{{ page.fileSlug }};">{{ title }}</h1>
+    <p class="hoja__fecha">{{ date | fechaLarga }}</p>
+    {% if tags %}
+    <ul class="hoja__tags">
+      {% for tag in tags %}
+      <li>#{{ tag }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  <div class="hoja__cuerpo">
+    {% if explicacion %}
+    <section class="seccion">
+      <h2 class="seccion__titulo">Explicación simple</h2>
+      <div class="seccion__texto">{{ explicacion | markdown | safe }}</div>
+    </section>
+    {% endif %}
+
+    {% if analogia %}
+    <section class="seccion">
+      <h2 class="seccion__titulo">🎨 Dibujo mental</h2>
+      <div class="seccion__texto">{{ analogia | markdown | safe }}</div>
+    </section>
+    {% endif %}
+
+    {% if puente %}
+    <section class="seccion">
+      <h2 class="seccion__titulo">🔗 Puente con otro tema</h2>
+      <div class="seccion__texto">{{ puente | markdown | safe }}</div>
+    </section>
+    {% endif %}
+
+    {% if content and content | trim | length %}
+    <section class="seccion">
+      <h2 class="seccion__titulo">Notas adicionales</h2>
+      <div class="seccion__texto">{{ content | safe }}</div>
+    </section>
+    {% endif %}
+
+    {% if reflexion %}
+    <section class="reflexion">
+      <p class="reflexion__etiqueta">💭 Para seguir pensando</p>
+      <p class="reflexion__texto">{{ reflexion | markdownInline | safe }}</p>
+    </section>
+    {% endif %}
+  </div>
+</article>
