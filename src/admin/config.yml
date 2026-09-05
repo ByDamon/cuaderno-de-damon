@@ -53,3 +53,31 @@ collections:
           widget: "hidden",
           default: "layouts/entrada.njk",
         }
+
+  - name: "ajustes"
+    label: "Ajustes del sitio"
+    editor:
+      preview: false
+    files:
+      - label: "Textos generales"
+        name: "general"
+        file: "src/_data/site.json"
+        fields:
+          - { label: "Título del sitio", name: "titulo", widget: "string" }
+          - { label: "Subtítulo (debajo del título)", name: "subtitulo", widget: "string" }
+          - {
+              label: "Introducción de la portada",
+              name: "introPortada",
+              widget: "text",
+            }
+          - {
+              label: "Nombre del autor (pie de página)",
+              name: "autor",
+              widget: "string",
+            }
+          - {
+              label: "Descripción del sitio (para buscadores)",
+              name: "descripcion",
+              widget: "text",
+            }
+          - { label: "URL del sitio", name: "url", widget: "string" }

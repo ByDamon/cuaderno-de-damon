@@ -3,12 +3,7 @@ layout: layouts/base.njk
 titulo: Cuaderno de Damon — Portada
 ---
 <section class="portada">
-  <p class="portada__intro">
-    Esta libreta no es un diario ni un apunte de clase. Es una enciclopedia viva:
-    un lugar donde las ideas sobre ciencia, medicina, universo y asombro se quedan
-    a vivir. No escribo para nadie más que para mi yo del futuro — el que vuelva
-    a estas páginas dentro de meses o años.
-  </p>
+  <p class="portada__intro">{{ site.introPortada }}</p>
   <ul class="portada__mapa">
     {% for cat in categorias %}
     <li style="--color-cat: {{ cat.color }};"><a href="/entradas/?categoria={{ cat.slug }}">{{ cat.emoji }} {{ cat.nombre }}</a></li>
