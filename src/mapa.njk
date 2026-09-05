@@ -1,0 +1,29 @@
+---
+layout: layouts/base.njk
+titulo: Mapa de conexiones — Cuaderno de Damon
+permalink: /mapa/
+---
+<section class="mapa">
+  <h1 class="mapa__titulo">Mapa de conexiones</h1>
+  <p class="mapa__intro">
+    Cada punto es una entrada; el color es su categoría. Las líneas son los
+    puentes que has trazado entre ideas. Pasa el cursor sobre un punto para
+    ver su título y sus conexiones, haz clic para entrar a leerla.
+  </p>
+
+  {% if collections.grafo.nodes.length %}
+  <div class="mapa__lienzo">
+    <svg id="grafo-svg" viewBox="0 0 700 460" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+  <script id="grafo-datos" type="application/json">{{ collections.grafo | json | safe }}</script>
+  <script src="/js/grafo.js"></script>
+  {% if not collections.grafo.edges.length %}
+  <p class="mapa__vacio">
+    Todavía no hay líneas: cuando escribas una entrada, elige "Entradas
+    relacionadas" en el panel para empezar a conectar ideas.
+  </p>
+  {% endif %}
+  {% else %}
+  <p class="mapa__vacio">Todavía no hay entradas para mostrar aquí.</p>
+  {% endif %}
+</section>

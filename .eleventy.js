@@ -28,6 +28,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/admin");
+  eleventyConfig.addPassthroughCopy("src/js");
 
   eleventyConfig.addFilter("fechaLarga", (fecha) => {
     return DateTime.fromJSDate(fecha, { zone: "utc" })
@@ -66,12 +67,52 @@ module.exports = function (eleventyConfig) {
     return JSON.stringify(entradas.map((e) => e.url));
   });
 
+  eleventyConfig.addFilter("json", (obj) => JSON.stringify(obj));
+
+  eleventyConfig.addFilter("resolverEntradas", (slugs, todas) => {
+    if (!slugs || !slugs.length || !todas) return [];
+    return slugs
+      .map((slug) => todas.find((e) => e.fileSlug === slug))
+      .filter(Boolean);
+  });
+
   eleventyConfig.addGlobalData("anioActual", () => new Date().getFullYear());
 
   eleventyConfig.addCollection("entradas", (collectionApi) => {
     return collectionApi.getFilteredByGlob("src/entradas/*.md").sort((a, b) => {
       return b.date - a.date;
     });
+  });
+
+  eleventyConfig.addCollection("grafo", (collectionApi) => {
+    const entradas = collectionApi.getFilteredByGlob("src/entradas/*.md");
+
+    const nodes = entradas.map((e) => {
+      const cat = buscarCategoria(e.data.categoria);
+      return {
+        id: e.fileSlug,
+        titulo: e.data.title,
+        url: e.url,
+        color: cat.color,
+      };
+    });
+
+    const idsValidos = new Set(nodes.map((n) => n.id));
+    const vistos = new Set();
+    const edges = [];
+
+    entradas.forEach((e) => {
+      const relacionadas = e.data.relacionadas || [];
+      relacionadas.forEach((rel) => {
+        if (!idsValidos.has(rel) || rel === e.fileSlug) return;
+        const clave = [e.fileSlug, rel].sort().join("::");
+        if (vistos.has(clave)) return;
+        vistos.add(clave);
+        edges.push({ source: e.fileSlug, target: rel });
+      });
+    });
+
+    return { nodes, edges };
   });
 
   return {

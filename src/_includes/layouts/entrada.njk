@@ -40,10 +40,23 @@ layout: layouts/base.njk
     </section>
     {% endif %}
 
-    {% if puente %}
+    {% set relacionadasResueltas = relacionadas | resolverEntradas(collections.entradas) %}
+    {% if puente or relacionadasResueltas.length %}
     <section class="seccion">
       <h2 class="seccion__titulo">🔗 Puente con otro tema</h2>
+      {% if puente %}
       <div class="seccion__texto">{{ puente | markdown | safe }}</div>
+      {% endif %}
+      {% if relacionadasResueltas.length %}
+      <ul class="relacionadas">
+        {% for rel in relacionadasResueltas %}
+        {% set relCat = rel.data.categoria | categoriaInfo %}
+        <li>
+          <a href="{{ rel.url }}" style="--color-cat: {{ relCat.color }};">{{ relCat.emoji }} {{ rel.data.title }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
     </section>
     {% endif %}
 

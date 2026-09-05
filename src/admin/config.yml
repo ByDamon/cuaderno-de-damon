@@ -38,6 +38,16 @@ collections:
       - { label: "Explicación simple", name: "explicacion", widget: "markdown", minimal: true }
       - { label: "Dibujo mental (analogía)", name: "analogia", widget: "markdown", minimal: true }
       - { label: "Puente con otro tema", name: "puente", widget: "markdown", minimal: true }
+      - label: "Entradas relacionadas"
+        name: "relacionadas"
+        widget: "relation"
+        collection: "entradas"
+        search_fields: ["title"]
+        display_fields: ["title"]
+        value_field: "{{slug}}"
+        multiple: true
+        required: false
+        hint: "Elige otras entradas con las que esta se conecta. Alimentan el Mapa de conexiones."
       - { label: "Para seguir pensando", name: "reflexion", widget: "text" }
       - { label: "Etiquetas", name: "tags", widget: "list", required: false }
       - {
