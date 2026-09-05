@@ -28,10 +28,10 @@
 
 @keyframes crecer-cinta {
   from {
-    transform: scaleY(0) rotate(-4deg);
+    transform: scaleY(0) rotate(-5deg);
   }
   to {
-    transform: scaleY(1) rotate(-4deg);
+    transform: scaleY(1) rotate(-5deg);
   }
 }
 
@@ -158,12 +158,13 @@ a:hover {
 
 .cabecera__cinta {
   display: inline-block;
-  width: 10px;
-  height: 26px;
+  width: 15px;
+  height: 34px;
   background: var(--acento);
-  border-radius: 1px;
-  transform: rotate(-4deg);
-  transform-origin: bottom;
+  clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
+  box-shadow: 1px 3px 4px -1px var(--sombra);
+  transform: rotate(-5deg);
+  transform-origin: top center;
   animation: crecer-cinta 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
 }
 
@@ -175,12 +176,38 @@ a:hover {
   animation: aparecer 0.5s ease-out 0.05s both;
 }
 
+.cabecera__trazo {
+  display: block;
+  width: 220px;
+  max-width: 60%;
+  height: auto;
+  margin: 4px auto 0;
+  animation: aparecer 0.5s ease-out 0.15s both;
+}
+
+.cabecera__paleta {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0;
+  margin: 12px 0 0;
+  animation: aparecer 0.5s ease-out 0.22s both;
+}
+
+.cabecera__paleta li {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
 .cabecera__subtitulo {
-  margin: 8px 0 20px;
+  margin: 10px 0 20px;
   font-style: italic;
   color: var(--tinta-suave);
   font-size: 1.05rem;
-  animation: aparecer 0.5s ease-out 0.15s both;
+  animation: aparecer 0.5s ease-out 0.28s both;
 }
 
 .cabecera__nav {

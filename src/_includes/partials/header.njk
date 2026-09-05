@@ -3,6 +3,14 @@
     <span class="cabecera__cinta" aria-hidden="true"></span>
     <span class="cabecera__titulo">{{ site.titulo }}</span>
   </a>
+  <svg class="cabecera__trazo" viewBox="0 0 260 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 9 C 50 2, 90 14, 130 7 S 210 2, 256 9" fill="none" stroke="var(--acento-suave)" stroke-width="2.5" stroke-linecap="round" />
+  </svg>
+  <ul class="cabecera__paleta" aria-hidden="true">
+    {% for cat in categorias %}
+    <li style="background: {{ cat.color }};"></li>
+    {% endfor %}
+  </ul>
   <p class="cabecera__subtitulo">{{ site.subtitulo }}</p>
   <nav class="cabecera__nav">
     <a href="/">Portada</a>
