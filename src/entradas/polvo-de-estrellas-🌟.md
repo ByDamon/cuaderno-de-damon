@@ -2,17 +2,16 @@
 title: POLVO DE ESTRELLAS 🌟
 categoria: universo
 date: 2026-09-05
-resumen: "1"
-explicacion: El hierro de tu sangre, el calcio de tus huesos y el carbono de tus
+resumen: El hierro de tu sangre, el calcio de tus huesos y el carbono de tus
   células nacieron dentro de estrellas que ya no existen.
+explicacion: "En el corazón de las estrellas ocurre algo casi mágico, aunque es
+  solo física: la presión y el calor son tan enormes que los átomos de hidrógeno
+  se fusionan para crear helio, luego carbono, luego oxígeno, luego hierro.
+  Elemento tras elemento, la estrella va cocinando la receta de la vida."
 analogia: >-
-  En el corazón de las estrellas ocurre algo casi mágico, aunque es solo física:
-  la presión y el calor son tan enormes que los átomos de hidrógeno se fusionan
-  para crear helio, luego carbono, luego oxígeno, luego hierro. Elemento tras
-  elemento, la estrella va cocinando la receta de la vida.
-
-
-  Cuando una estrella muy grande llega al final de sus días, explota. Es una **supernova**. Y en ese cataclismo hermoso, esparce todos esos elementos por el espacio como semillas al viento.
+  Cuando una estrella muy grande llega al final de sus días, explota. Es
+  una **supernova**. Y en ese cataclismo hermoso, esparce todos esos elementos
+  por el espacio como semillas al viento.
 
 
   Miles de millones de años después, parte de ese polvo estelar se unió para formar nuestro sistema solar, la Tierra, los océanos, las plantas… y tú.
