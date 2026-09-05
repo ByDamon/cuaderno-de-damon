@@ -1,7 +1,7 @@
 ---
 title: POLVO DE ESTRELLAS 🌟
 categoria: universo
-date: 2026-09-05
+date: 2026-05-27
 resumen: El hierro de tu sangre, el calcio de tus huesos y el carbono de tus
   células nacieron dentro de estrellas que ya no existen.
 explicacion: "En el corazón de las estrellas ocurre algo casi mágico, aunque es
