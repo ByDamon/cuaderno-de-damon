@@ -1,7 +1,7 @@
 ---
 title: EL TIEMPO QUE MIRA ATRÁS 🌌
 categoria: universo
-date: 2026-09-05
+date: 2026-05-26
 resumen: Mirar lejos en el espacio es mirar atrás en el tiempo. Cada estrella
   que ves es una fotografía antigua del universo.
 explicacion: >-
