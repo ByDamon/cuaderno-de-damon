@@ -1,7 +1,7 @@
 ---
 title: "EL AMOR: LA QUÍMICA DEL ENCUENTRO ❤️"
 categoria: medicina
-date: 2026-09-05
+date: 2026-06-04
 resumen: El amor no es solo una emoción. Es un proceso biológico real que ocurre
   en tu cerebro, con fases, hormonas y hasta "efectos secundarios". Entenderlo
   no le quita magia. Le añade otra capa de asombro.
