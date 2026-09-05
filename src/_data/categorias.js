@@ -5,6 +5,7 @@ module.exports = [
     emoji: "🟣",
     color: "#7c4fa0",
     colorSuave: "#e6dcef",
+    descripcion: "El cuerpo, sus señales y por qué hace lo que hace.",
   },
   {
     slug: "universo",
@@ -12,6 +13,7 @@ module.exports = [
     emoji: "🔵",
     color: "#3a6ea5",
     colorSuave: "#dbe6f0",
+    descripcion: "El cosmos, la luz y las preguntas más grandes.",
   },
   {
     slug: "ciencia",
@@ -19,6 +21,7 @@ module.exports = [
     emoji: "🟢",
     color: "#4c8c62",
     colorSuave: "#dcebe1",
+    descripcion: "Cómo funciona el mundo, un mecanismo a la vez.",
   },
   {
     slug: "reflexiones",
@@ -26,6 +29,7 @@ module.exports = [
     emoji: "🟡",
     color: "#b8912f",
     colorSuave: "#f0e7d2",
+    descripcion: "Pausas para pensar más despacio.",
   },
   {
     slug: "tecnologia",
@@ -33,5 +37,6 @@ module.exports = [
     emoji: "🟠",
     color: "#c1652f",
     colorSuave: "#f1ddce",
+    descripcion: "Lo nuevo, y lo que significa para el futuro.",
   },
 ];

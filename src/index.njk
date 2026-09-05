@@ -3,12 +3,48 @@ layout: layouts/base.njk
 titulo: Cuaderno de Damon — Portada
 ---
 <section class="portada">
+  <div class="portada__hero">
+    <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración de un planeta en órbita, un átomo y una línea de pulso, representando el universo, la ciencia y la medicina">
+      <line x1="30" y1="152" x2="690" y2="152" stroke="var(--linea)" stroke-width="1.5" stroke-dasharray="1 8" stroke-linecap="round" />
+
+      <g>
+        <ellipse cx="130" cy="100" rx="75" ry="26" transform="rotate(-18 130 100)" fill="none" stroke="#3a6ea5" stroke-width="2" opacity="0.9" />
+        <circle cx="130" cy="100" r="9" fill="var(--papel)" stroke="#3a6ea5" stroke-width="2.5" />
+        <circle cx="196" cy="83" r="5" fill="#3a6ea5" />
+        <circle cx="55" cy="56" r="1.6" fill="#3a6ea5" opacity="0.6" />
+        <circle cx="212" cy="62" r="1.4" fill="#3a6ea5" opacity="0.6" />
+        <circle cx="68" cy="146" r="1.6" fill="#3a6ea5" opacity="0.6" />
+      </g>
+
+      <g>
+        <ellipse cx="365" cy="100" rx="58" ry="22" fill="none" stroke="#4c8c62" stroke-width="2" opacity="0.9" />
+        <ellipse cx="365" cy="100" rx="58" ry="22" fill="none" stroke="#4c8c62" stroke-width="2" opacity="0.9" transform="rotate(60 365 100)" />
+        <ellipse cx="365" cy="100" rx="58" ry="22" fill="none" stroke="#4c8c62" stroke-width="2" opacity="0.9" transform="rotate(120 365 100)" />
+        <circle cx="365" cy="100" r="5" fill="#4c8c62" />
+      </g>
+
+      <g>
+        <path d="M470 100 H500 L515 66 L535 132 L552 100 H650" fill="none" stroke="#7c4fa0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+
+      <path d="M652 40 L656 50 L666 54 L656 58 L652 68 L648 58 L638 54 L648 50 Z" fill="var(--acento)" opacity="0.85" />
+    </svg>
+  </div>
+
   <p class="portada__intro">{{ site.introPortada }}</p>
-  <ul class="portada__mapa">
+</section>
+
+<section class="portada__temas">
+  <h2 class="portada__temas-titulo">Explora por tema</h2>
+  <div class="temas">
     {% for cat in categorias %}
-    <li style="--color-cat: {{ cat.color }};"><a href="/entradas/?categoria={{ cat.slug }}">{{ cat.emoji }} {{ cat.nombre }}</a></li>
+    <a class="tema" href="/entradas/?categoria={{ cat.slug }}" style="--color-cat: {{ cat.color }};">
+      <span class="tema__emoji">{{ cat.emoji }}</span>
+      <span class="tema__nombre">{{ cat.nombre }}</span>
+      <span class="tema__descripcion">{{ cat.descripcion }}</span>
+    </a>
     {% endfor %}
-  </ul>
+  </div>
 </section>
 
 <section class="ultimas">
