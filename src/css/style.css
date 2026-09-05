@@ -627,6 +627,17 @@ a:hover {
   margin-bottom: 0;
 }
 
+/* Letra capital al abrir la entrada, como en un manuscrito */
+.seccion__texto--capitular > p:first-child::first-letter {
+  font-family: var(--fuente-titulo);
+  font-size: 3.6rem;
+  font-weight: 700;
+  line-height: 0.75;
+  float: left;
+  padding: 4px 8px 0 0;
+  color: var(--color-cat, var(--acento));
+}
+
 /* Reflexión final: como una nota destacada */
 .reflexion {
   margin: 34px 0 6px;

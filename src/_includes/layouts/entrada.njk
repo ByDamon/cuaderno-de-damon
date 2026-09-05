@@ -27,9 +27,9 @@ layout: layouts/base.njk
 
   <div class="hoja__cuerpo">
     {% if explicacion %}
-    <section class="seccion">
+    <section class="seccion seccion--explicacion">
       <h2 class="seccion__titulo">Explicación simple</h2>
-      <div class="seccion__texto">{{ explicacion | markdown | safe }}</div>
+      <div class="seccion__texto seccion__texto--capitular">{{ explicacion | markdown | safe }}</div>
     </section>
     {% endif %}
 
