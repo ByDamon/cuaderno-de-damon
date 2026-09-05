@@ -19,5 +19,21 @@
     </main>
     {% include "partials/footer.njk" %}
   </div>
+  <script>
+    (function () {
+      var boton = document.getElementById("boton-sorpresa");
+      if (!boton) return;
+      boton.addEventListener("click", function () {
+        var urls = JSON.parse(boton.dataset.urls || "[]");
+        if (!urls.length) return;
+        var actual = decodeURIComponent(window.location.pathname);
+        var candidatos = urls.filter(function (u) {
+          return u !== actual;
+        });
+        var lista = candidatos.length ? candidatos : urls;
+        window.location.href = lista[Math.floor(Math.random() * lista.length)];
+      });
+    })();
+  </script>
 </body>
 </html>

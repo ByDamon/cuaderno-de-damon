@@ -178,14 +178,22 @@ a:hover {
   animation: aparecer 0.5s ease-out 0.25s both;
 }
 
-.cabecera__nav a {
+.cabecera__nav a,
+.cabecera__nav button {
   text-decoration: none;
   color: var(--tinta);
   padding-bottom: 3px;
   border-bottom: 1px solid transparent;
+  font: inherit;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
 }
 
-.cabecera__nav a:hover {
+.cabecera__nav a:hover,
+.cabecera__nav button:hover {
   border-bottom-color: var(--acento);
   color: var(--acento);
 }
@@ -452,6 +460,23 @@ a:hover {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--color-cat, var(--acento));
+}
+
+/* ---------- Barra de progreso de lectura ---------- */
+.progreso-lectura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  z-index: 100;
+}
+
+.progreso-lectura__barra {
+  height: 100%;
+  width: 0%;
+  background: var(--color-cat, var(--acento));
 }
 
 /* ---------- Página de entrada individual (estilo hoja de cuaderno) ---------- */

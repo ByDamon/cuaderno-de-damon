@@ -2,6 +2,9 @@
 layout: layouts/base.njk
 ---
 {% set cat = categoria | categoriaInfo %}
+<div class="progreso-lectura" aria-hidden="true" style="--color-cat: {{ cat.color }};">
+  <div class="progreso-lectura__barra"></div>
+</div>
 <article class="hoja" style="--color-cat: {{ cat.color }}; --color-cat-suave: {{ cat.colorSuave }};">
   <p class="hoja__volver"><a href="/entradas/">← volver al índice</a></p>
 
@@ -10,7 +13,9 @@ layout: layouts/base.njk
       <a href="/entradas/?categoria={{ cat.slug }}">{{ cat.emoji }} {{ cat.nombre }}</a>
     </p>
     <h1 class="hoja__titulo" style="view-transition-name: titulo-{{ page.fileSlug }};">{{ title }}</h1>
-    <p class="hoja__fecha">{{ date | fechaLarga }}</p>
+    <p class="hoja__fecha">
+      {{ date | fechaLarga }} · {{ explicacion | tiempoLectura(analogia, puente, reflexion, content) }}
+    </p>
     {% if tags %}
     <ul class="hoja__tags">
       {% for tag in tags %}
@@ -57,3 +62,20 @@ layout: layouts/base.njk
     {% endif %}
   </div>
 </article>
+
+<script>
+  (function () {
+    var barra = document.querySelector(".progreso-lectura__barra");
+    if (!barra) return;
+
+    function actualizar() {
+      var alturaTotal = document.documentElement.scrollHeight - window.innerHeight;
+      var progreso = alturaTotal > 0 ? (window.scrollY / alturaTotal) * 100 : 0;
+      barra.style.width = Math.min(100, Math.max(0, progreso)) + "%";
+    }
+
+    window.addEventListener("scroll", actualizar, { passive: true });
+    window.addEventListener("resize", actualizar);
+    actualizar();
+  })();
+</script>

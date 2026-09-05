@@ -8,5 +8,10 @@
     <a href="/">Portada</a>
     <a href="/entradas/">Índice de entradas</a>
     <a href="/sobre/">Sobre este cuaderno</a>
+    {% if collections.entradas.length %}
+    <button type="button" id="boton-sorpresa" data-urls='{{ collections.entradas | urlsJSON | safe }}'>
+      🎲 Sorpréndeme
+    </button>
+    {% endif %}
   </nav>
 </header>

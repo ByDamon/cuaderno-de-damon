@@ -4,6 +4,14 @@ const categorias = require("./src/_data/categorias.js");
 
 const md = new MarkdownIt({ html: false, breaks: false });
 
+function contarPalabras(texto) {
+  if (!texto) return 0;
+  const limpio = texto
+    .replace(/[#*_>`~]/g, "")
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1");
+  return limpio.trim().split(/\s+/).filter(Boolean).length;
+}
+
 function buscarCategoria(slug) {
   return (
     categorias.find((c) => c.slug === slug) || {
@@ -39,6 +47,24 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("categoriaInfo", buscarCategoria);
+
+  eleventyConfig.addFilter(
+    "tiempoLectura",
+    (explicacion, analogia, puente, reflexion, contenido) => {
+      const total =
+        contarPalabras(explicacion) +
+        contarPalabras(analogia) +
+        contarPalabras(puente) +
+        contarPalabras(reflexion) +
+        contarPalabras(contenido);
+      const minutos = Math.max(1, Math.round(total / 200));
+      return `${minutos} min de lectura`;
+    }
+  );
+
+  eleventyConfig.addFilter("urlsJSON", (entradas) => {
+    return JSON.stringify(entradas.map((e) => e.url));
+  });
 
   eleventyConfig.addGlobalData("anioActual", () => new Date().getFullYear());
 
