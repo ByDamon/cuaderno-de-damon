@@ -11,6 +11,7 @@
   --sombra: rgba(44, 36, 23, 0.18);
   --fuente-titulo: "Caveat", cursive;
   --fuente-cuerpo: "Lora", Georgia, "Times New Roman", serif;
+  --interlineado: 28px;
 }
 
 /* ---------- Animaciones ---------- */
@@ -123,6 +124,20 @@ a:hover {
   border: 1px solid rgba(44, 36, 23, 0.06);
   border-radius: 4px;
   pointer-events: none;
+}
+
+/* Grano de papel: una textura muy sutil, para que la página se lea
+   como fibra de papel y no como un color plano de pantalla. */
+.pagina::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='n'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0.17  0 0 0 0 0.14  0 0 0 0 0.09  0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 /* ---------- Cabecera ---------- */
@@ -572,20 +587,22 @@ a:hover {
   position: relative;
   padding: 28px 0 8px 28px;
   border-left: 2px solid var(--color-cat, var(--margen-roja));
+  line-height: var(--interlineado);
   background-image: repeating-linear-gradient(
     to bottom,
     transparent,
-    transparent 38px,
-    var(--linea) 39px
+    transparent calc(var(--interlineado) - 1px),
+    var(--linea) var(--interlineado)
   );
+  background-position: 0 6px;
 }
 
 .hoja__cuerpo p {
-  margin: 0 0 20px;
+  margin: 0 0 var(--interlineado);
 }
 
 .hoja__cuerpo blockquote {
-  margin: 0 0 20px;
+  margin: 0 0 var(--interlineado);
   padding: 4px 0 4px 18px;
   border-left: 3px solid var(--acento-suave);
   font-style: italic;
@@ -594,7 +611,7 @@ a:hover {
 
 .hoja__cuerpo ul,
 .hoja__cuerpo ol {
-  margin: 0 0 20px;
+  margin: 0 0 var(--interlineado);
   padding-left: 24px;
 }
 
