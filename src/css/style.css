@@ -438,6 +438,7 @@ a:hover {
 .ultimas__titulo,
 .indice__titulo,
 .sobre__titulo,
+.sugerencia__titulo,
 .hoja__titulo {
   font-family: var(--fuente-titulo);
   font-size: clamp(1.8rem, 5vw, 2.4rem);
@@ -921,6 +922,100 @@ a:hover {
 
 .grafo__nodo-grupo--activo .grafo__etiqueta {
   opacity: 1;
+}
+
+/* ---------- Sugerencia ---------- */
+.sugerencia__intro {
+  max-width: 60ch;
+  color: var(--tinta-suave);
+  margin: 0 0 32px;
+}
+
+.sugerencia__form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 480px;
+  animation: aparecer 0.5s ease-out both;
+}
+
+.sugerencia__form[hidden] {
+  display: none;
+}
+
+.sugerencia__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: var(--tinta);
+}
+
+.sugerencia__campo span {
+  font-weight: 600;
+}
+
+.sugerencia__campo em {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--tinta-suave);
+}
+
+.sugerencia__campo input,
+.sugerencia__campo textarea {
+  font: inherit;
+  font-family: var(--fuente-cuerpo);
+  padding: 8px 4px;
+  border: none;
+  border-bottom: 2px solid var(--linea);
+  background: transparent;
+  color: var(--tinta);
+  resize: vertical;
+  transition: border-color 0.15s ease;
+}
+
+.sugerencia__campo input:focus,
+.sugerencia__campo textarea:focus {
+  outline: none;
+  border-bottom-color: var(--acento);
+}
+
+.sugerencia__enviar {
+  align-self: flex-start;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #fbf3e6;
+  background: var(--acento);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px -8px var(--sombra);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.sugerencia__enviar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -10px var(--sombra);
+  filter: brightness(1.08);
+}
+
+.sugerencia__enviar:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.sugerencia__gracias {
+  max-width: 480px;
+  padding: 18px 22px;
+  border: 1px dashed var(--acento-suave);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.35);
+  animation: aparecer 0.4s ease-out both;
+}
+
+.sugerencia__gracias p {
+  margin: 0;
 }
 
 /* ---------- Sobre ---------- */

@@ -1,0 +1,80 @@
+---
+layout: layouts/base.njk
+titulo: Sugiéreme un tema — Cuaderno de Damon
+permalink: /sugerencia/
+---
+<section class="sugerencia">
+  <h1 class="sugerencia__titulo">Sugiéreme un tema</h1>
+  <p class="sugerencia__intro">
+    ¿Hay algo que te gustaría que investigue y explique a mi estilo — con su
+    explicación simple, su dibujo mental, su puente y su pregunta al final?
+    Cuéntamelo aquí. Leo cada sugerencia.
+  </p>
+
+  <form
+    name="sugerencia"
+    method="POST"
+    action="/sugerencia/gracias/"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    class="sugerencia__form"
+    id="sugerencia-form"
+  >
+    <input type="hidden" name="form-name" value="sugerencia" />
+    <p hidden>
+      <label>No llenes esto si eres humano: <input name="bot-field" /></label>
+    </p>
+
+    <label class="sugerencia__campo">
+      <span>Tu nombre <em>(opcional)</em></span>
+      <input type="text" name="nombre" autocomplete="name" />
+    </label>
+
+    <label class="sugerencia__campo">
+      <span>Tu correo <em>(opcional, por si quiero responderte)</em></span>
+      <input type="email" name="correo" autocomplete="email" />
+    </label>
+
+    <label class="sugerencia__campo">
+      <span>¿Qué tema te gustaría que explore?</span>
+      <textarea
+        name="mensaje"
+        rows="5"
+        required
+        placeholder="Ej: ¿por qué bostezamos? ¿cómo funciona la memoria? ¿qué es un agujero negro?"
+      ></textarea>
+    </label>
+
+    <button type="submit" class="sugerencia__enviar">✍️ Enviar sugerencia</button>
+  </form>
+
+  <div class="sugerencia__gracias" id="sugerencia-gracias" hidden>
+    <p>💌 ¡Gracias! Tu sugerencia ya está en mi cuaderno de pendientes.</p>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var form = document.getElementById("sugerencia-form");
+    var gracias = document.getElementById("sugerencia-gracias");
+    if (!form || !gracias) return;
+
+    form.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+      var datos = new URLSearchParams(new FormData(form)).toString();
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: datos,
+      })
+        .then(function () {
+          form.hidden = true;
+          gracias.hidden = false;
+        })
+        .catch(function () {
+          form.submit();
+        });
+    });
+  })();
+</script>
