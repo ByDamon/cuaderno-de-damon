@@ -580,10 +580,17 @@ a:hover {
 }
 
 .reflexion__texto {
-  margin: 0;
   font-style: italic;
   font-size: 1.05rem;
   color: var(--tinta);
+}
+
+.reflexion__texto p {
+  margin: 0 0 14px;
+}
+
+.reflexion__texto p:last-child {
+  margin-bottom: 0;
 }
 
 /* ---------- Sobre ---------- */

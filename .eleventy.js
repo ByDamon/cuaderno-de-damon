@@ -38,11 +38,6 @@ module.exports = function (eleventyConfig) {
     return md.render(texto);
   });
 
-  eleventyConfig.addFilter("markdownInline", (texto) => {
-    if (!texto) return "";
-    return md.renderInline(texto);
-  });
-
   eleventyConfig.addFilter("categoriaInfo", buscarCategoria);
 
   eleventyConfig.addGlobalData("anioActual", () => new Date().getFullYear());

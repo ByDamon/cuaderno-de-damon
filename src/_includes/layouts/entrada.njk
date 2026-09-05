@@ -52,7 +52,7 @@ layout: layouts/base.njk
     {% if reflexion %}
     <section class="reflexion">
       <p class="reflexion__etiqueta">💭 Para seguir pensando</p>
-      <p class="reflexion__texto">{{ reflexion | markdownInline | safe }}</p>
+      <div class="reflexion__texto">{{ reflexion | markdown | safe }}</div>
     </section>
     {% endif %}
   </div>
