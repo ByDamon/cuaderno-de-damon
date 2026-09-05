@@ -115,6 +115,21 @@ module.exports = function (eleventyConfig) {
     return { nodes, edges };
   });
 
+  eleventyConfig.addCollection("talDiaComoHoy", (collectionApi) => {
+    const entradas = collectionApi.getFilteredByGlob("src/entradas/*.md");
+    return entradas.map((e) => {
+      const cat = buscarCategoria(e.data.categoria);
+      return {
+        url: e.url,
+        titulo: e.data.title,
+        fecha: e.date.toISOString().slice(0, 10),
+        emoji: cat.emoji,
+        color: cat.color,
+        colorSuave: cat.colorSuave,
+      };
+    });
+  });
+
   eleventyConfig.addCollection("vistaPrevia", (collectionApi) => {
     const entradas = collectionApi.getFilteredByGlob("src/entradas/*.md");
     const mapa = {};

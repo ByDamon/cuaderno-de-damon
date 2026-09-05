@@ -287,6 +287,64 @@ a:hover {
   height: auto;
 }
 
+/* ---------- Tal día como hoy ---------- */
+.tal-dia {
+  margin: 0 0 40px;
+  padding: 16px 20px;
+  border: 1px dashed var(--acento-suave);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.35);
+  animation: aparecer 0.5s ease-out 0.15s both;
+}
+
+.tal-dia__titulo {
+  margin: 0 0 10px;
+  font-family: var(--fuente-titulo);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.tal-dia__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tal-dia__lista a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--tinta);
+  padding: 6px 10px;
+  border-left: 3px solid var(--color-cat, var(--acento));
+  border-radius: 2px;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.tal-dia__lista a:hover {
+  background: var(--color-cat-suave, var(--papel-oscuro));
+  transform: translateX(3px);
+}
+
+.tal-dia__antiguedad {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--color-cat, var(--acento));
+  white-space: nowrap;
+}
+
+.tal-dia__entrada {
+  font-size: 1rem;
+}
+
 .portada__temas {
   margin: 0 0 52px;
 }

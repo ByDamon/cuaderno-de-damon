@@ -34,6 +34,65 @@ titulo: Cuaderno de Damon — Portada
   <p class="portada__intro">{{ site.introPortada }}</p>
 </section>
 
+<section class="tal-dia" id="tal-dia" hidden aria-live="polite"></section>
+<script id="tal-dia-datos" type="application/json">{{ collections.talDiaComoHoy | json | safe }}</script>
+<script>
+  (function () {
+    var contenedor = document.getElementById("tal-dia");
+    var datosEl = document.getElementById("tal-dia-datos");
+    if (!contenedor || !datosEl) return;
+
+    var entradas;
+    try {
+      entradas = JSON.parse(datosEl.textContent || "[]");
+    } catch (err) {
+      return;
+    }
+
+    var hoy = new Date();
+    var mes = hoy.getMonth();
+    var dia = hoy.getDate();
+    var anioActual = hoy.getFullYear();
+
+    var coincidencias = entradas
+      .map(function (e) {
+        var partes = e.fecha.split("-").map(Number);
+        return { entrada: e, fecha: new Date(partes[0], partes[1] - 1, partes[2]) };
+      })
+      .filter(function (item) {
+        return (
+          item.fecha.getMonth() === mes &&
+          item.fecha.getDate() === dia &&
+          item.fecha.getFullYear() < anioActual
+        );
+      })
+      .sort(function (a, b) {
+        return a.fecha.getFullYear() - b.fecha.getFullYear();
+      });
+
+    if (!coincidencias.length) return;
+
+    function etiquetaAnios(anios) {
+      return anios === 1 ? "hace 1 año" : "hace " + anios + " años";
+    }
+
+    var html = '<p class="tal-dia__titulo">📌 Tal día como hoy…</p><ul class="tal-dia__lista">';
+    coincidencias.forEach(function (item) {
+      var e = item.entrada;
+      var anios = anioActual - item.fecha.getFullYear();
+      html +=
+        '<li><a href="' + e.url + '" style="--color-cat: ' + e.color + '; --color-cat-suave: ' + e.colorSuave + ';">' +
+        '<span class="tal-dia__antiguedad">' + etiquetaAnios(anios) + '</span>' +
+        '<span class="tal-dia__entrada">' + e.emoji + " " + e.titulo + "</span>" +
+        "</a></li>";
+    });
+    html += "</ul>";
+
+    contenedor.innerHTML = html;
+    contenedor.hidden = false;
+  })();
+</script>
+
 <section class="portada__temas">
   <h2 class="portada__temas-titulo">Explora por tema</h2>
   <div class="temas">
