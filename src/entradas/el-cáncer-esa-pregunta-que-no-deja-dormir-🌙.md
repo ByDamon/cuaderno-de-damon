@@ -1,6 +1,7 @@
 ---
 title: "El CÁNCER: ESA PREGUNTA QUE NO NOS DEJA DORMIR🌗"
 categoria: medicina
+madurez: desarrollo
 date: 2026-09-05
 resumen: El cáncer es como si dentro de tu cuerpo algunas células se volvieran
   rebeldes y no quisieran seguir las reglas. Pero no hay una sola rebelión; hay
