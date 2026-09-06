@@ -8,17 +8,19 @@
   </svg>
   <ul class="cabecera__paleta" aria-hidden="true">
     {% for cat in categorias %}
-    <li style="background: {{ cat.color }};"></li>
+    <li style="--color-cat: {{ cat.color }};">{{ cat.emoji }}</li>
     {% endfor %}
   </ul>
   <p class="cabecera__subtitulo">{{ site.subtitulo }}</p>
   <nav class="cabecera__nav">
-    <a href="/">Portada</a>
-    <a href="/entradas/">Índice de entradas</a>
-    <a href="/sobre/">Sobre este cuaderno</a>
-    <a href="/mapa/">Mapa</a>
-    <a href="/glosario/">Glosario A-Z</a>
-    <a href="/sugerencia/">Sugerencia</a>
+    <div class="cabecera__nav-links">
+      <a href="/">Portada</a>
+      <a href="/entradas/">Índice de entradas</a>
+      <a href="/sobre/">Sobre este cuaderno</a>
+      <a href="/mapa/">Mapa</a>
+      <a href="/glosario/">Glosario A-Z</a>
+      <a href="/sugerencia/">Sugerencia</a>
+    </div>
     {% if collections.entradas.length %}
     <button type="button" id="boton-sorpresa" class="boton-sorpresa" data-urls='{{ collections.entradas | urlsJSON | safe }}'>
       <span class="boton-sorpresa__dado" aria-hidden="true">🎲</span> Sorpréndeme

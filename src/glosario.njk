@@ -32,7 +32,7 @@ permalink: /glosario/
       {% set cat = entrada.data.categoria | categoriaInfo %}
       <li>
         <a href="{{ entrada.url }}" style="--color-cat: {{ cat.color }};">
-          <span class="glosario__punto" aria-hidden="true"></span>
+          <span class="glosario__punto" aria-hidden="true">{{ cat.emoji }}</span>
           {{ entrada.data.title }}
         </a>
       </li>
