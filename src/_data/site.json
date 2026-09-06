@@ -1,11 +1,11 @@
 {
-  "titulo": "Cuaderno de Damon",
-  "subtitulo": "Una enciclopedia viva: ciencia, medicina, universo y asombro",
   "autor": "Damon",
   "descripcion": "Enciclopedia personal viva sobre ciencia, medicina, universo y asombro, escrita para el yo del futuro.",
   "url": "https://cuadernodedamon.com/",
+  "aviso": "Prueba :1 de comunidad ",
   "introPortada": "Esta libreta no es un diario ni un apunte de clase. Es una enciclopedia viva: un lugar donde guardo lo que me asombra del universo, de la mente y de la vida. No escribo para nadie más que para mi yo del futuro — el que vuelva a estas páginas dentro de meses o años.",
-  "instagramUrl": "https://www.instagram.com/heeymadafaca/",
   "xUrl": "https://x.com/heeymadafaca",
-  "aviso": ""
+  "subtitulo": "Una enciclopedia viva: ciencia, medicina, universo y asombro",
+  "titulo": "Cuaderno de Damon",
+  "instagramUrl": "https://www.instagram.com/heeymadafaca/"
 }
