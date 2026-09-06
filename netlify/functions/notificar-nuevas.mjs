@@ -23,6 +23,34 @@ function extraerItems(xml) {
   return items;
 }
 
+function construirCorreoHtml({ item, sitioUrl, enlaceBaja }) {
+  return `
+<div style="background-color:#e9dcc3; padding:32px 16px; font-family: Georgia, 'Times New Roman', serif;">
+  <div style="max-width:520px; margin:0 auto; background-color:#f3ead9; border-radius:6px; padding:36px 32px; box-shadow:0 6px 18px rgba(44,36,23,0.12);">
+    <p style="margin:0 0 6px; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:#8c3a2b; font-weight:bold;">📖 Cuaderno de Damon</p>
+    <p style="margin:0 0 22px; font-size:14px; color:#5a5040; font-style:italic;">Hay una entrada nueva en el cuaderno</p>
+
+    <h1 style="margin:0 0 14px; font-size:22px; line-height:1.3; color:#2c2417;">
+      <a href="${item.enlace}" style="color:#2c2417; text-decoration:none;">${item.titulo}</a>
+    </h1>
+
+    <p style="margin:0 0 26px; font-size:16px; line-height:1.65; color:#5a5040;">${item.descripcion}</p>
+
+    <p style="margin:0 0 30px;">
+      <a href="${item.enlace}" style="display:inline-block; background-color:#8c3a2b; color:#fbf3e6; padding:11px 24px; border-radius:999px; text-decoration:none; font-size:14px; font-weight:bold;">Leer la entrada completa →</a>
+    </p>
+
+    <hr style="border:none; border-top:1px dashed rgba(44,36,23,0.2); margin:0 0 18px;">
+
+    <p style="margin:0; font-size:12px; line-height:1.6; color:#8a8072;">
+      Recibes esto porque te suscribiste en ${sitioUrl.replace(/^https?:\/\//, "")}.<br>
+      <a href="${enlaceBaja}" style="color:#8a8072;">Darme de baja</a>
+    </p>
+  </div>
+</div>
+  `.trim();
+}
+
 async function enviarUno({ apiKey, remitente, destinatario, asunto, html }) {
   const respuesta = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -47,12 +75,9 @@ async function enviarUno({ apiKey, remitente, destinatario, asunto, html }) {
 export default async () => {
   const apiKey = process.env.RESEND_API_KEY;
   const remitente = process.env.CORREO_REMITENTE;
-  const sitioUrl = process.env.URL || "https://cuadernodedamon.netlify.app";
-
-  console.log(`sitioUrl=${sitioUrl} apiKey=${apiKey ? "definida" : "FALTA"} remitente=${remitente || "FALTA"}`);
+  const sitioUrl = process.env.URL || "https://cuadernodedamon.com";
 
   if (!apiKey || !remitente) {
-    console.log("Faltan RESEND_API_KEY o CORREO_REMITENTE; se omite esta ronda de avisos.");
     return new Response("ok");
   }
 
@@ -67,62 +92,40 @@ export default async () => {
   }
 
   const items = extraerItems(xml);
-  console.log(`Entradas encontradas en el feed: ${items.length}`);
 
   const storeEstado = getStore("estado-notificaciones");
   const yaNotificadas = (await storeEstado.get("guids", { type: "json" })) || [];
   const yaNotificadasSet = new Set(yaNotificadas);
-  console.log(`Ya marcadas como notificadas: ${yaNotificadas.length}`);
 
   const nuevas = items.filter((item) => !yaNotificadasSet.has(item.guid));
-  console.log(`Nuevas por avisar: ${nuevas.length}`, nuevas.map((n) => n.titulo));
 
   // Primera vez que corre esta función: no manda un correo por cada entrada
   // vieja, solo marca todo como "ya visto" y arranca a avisar desde aquí.
   if (!yaNotificadas.length && items.length) {
-    console.log("Primera corrida: marcando entradas actuales como ya vistas, sin enviar correos.");
     await storeEstado.setJSON("guids", items.map((item) => item.guid));
     return new Response("ok");
   }
 
   if (!nuevas.length) {
-    console.log("No hay entradas nuevas que avisar.");
     return new Response("ok");
   }
 
   const storeSuscriptores = getStore("suscriptores");
   const suscriptores = (await storeSuscriptores.get("lista", { type: "json" })) || [];
-  console.log(`Suscriptores guardados: ${suscriptores.length}`, suscriptores);
-
-  if (!suscriptores.length) {
-    console.log("Hay entradas nuevas pero no hay suscriptores guardados; no se manda nada.");
-  }
 
   if (suscriptores.length) {
     for (const item of nuevas.reverse()) {
-      const html = `
-        <p>📖 Hay una entrada nueva en el Cuaderno de Damon:</p>
-        <h2><a href="${item.enlace}">${item.titulo}</a></h2>
-        <p>${item.descripcion}</p>
-        <p><a href="${item.enlace}">Leer la entrada completa →</a></p>
-        <hr />
-        <p style="font-size:12px;color:#888;">
-          Recibes esto porque te suscribiste en cuadernodedamon.netlify.app.
-        </p>
-      `;
-
       for (const correo of suscriptores) {
         const enlaceBaja = `${sitioUrl}/.netlify/functions/desuscribir?correo=${encodeURIComponent(correo)}`;
-        const htmlPersonalizado = `${html}<p style="font-size:12px;color:#888;"><a href="${enlaceBaja}">Darme de baja</a></p>`;
+        const html = construirCorreoHtml({ item, sitioUrl, enlaceBaja });
 
         await enviarUno({
           apiKey,
           remitente,
           destinatario: correo,
           asunto: `📖 Nueva entrada: ${item.titulo}`,
-          html: htmlPersonalizado,
+          html,
         });
-        console.log(`Correo enviado (o intentado) a ${correo} sobre "${item.titulo}"`);
       }
     }
   }
