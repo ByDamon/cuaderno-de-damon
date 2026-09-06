@@ -41,6 +41,7 @@ puente: >-
   🟡Quizás la pregunta no es "por qué no hay cura", sino "por qué necesitamos creer que hay una cura que nos esconden". ¿Qué dice eso de nosotros? Que preferimos una conspiración antes que aceptar la fragilidad del cuerpo. Que es más fácil pensar que hay un enemigo malvado detrás, que aceptar que el universo es indiferente y nuestro cuerpo, frágil. Esa necesidad de encontrar un culpable, un responsable, un villano al que odiar, en lugar de mirar de frente la incertidumbre.
 relacionadas:
   - polvo-de-estrellas-🌟
+  - el-cerebro-que-se-engaña-a-sí-mismo-🧠
 reflexion: >-
   La gente cree que hay una cura oculta porque no puede soportar la idea de que
   la medicina no tenga todas las respuestas. Es más fácil imaginar que hay un
