@@ -70,8 +70,6 @@ reflexion: >-
 
 
   Cuando leas esto dentro de años, ¿qué hábitos nuevos incorporaste que hoy ni siquiera imaginas? ¿Qué marcas epigenéticas crees que estás dejando ahora? Y sobre todo: ¿aprendiste a ver tu cuerpo no como un destino, sino como un diálogo entre lo que heredaste y lo que eliges?
-tags:
-  - Prueba1
+tags: []
 layout: layouts/entrada.njk
 ---
-Prueba 2
