@@ -78,6 +78,38 @@
       })();
     </script>
     {% endif %}
+    <div class="bienvenida-especial" id="bienvenida-pinterest" hidden>
+      <p class="bienvenida-especial__texto">📌 Llegaste desde Pinterest — bienvenido al cuaderno. <a href="/entradas/">Explora más entradas →</a></p>
+      <button type="button" class="bienvenida-especial__cerrar" id="bienvenida-pinterest-cerrar" aria-label="Cerrar">×</button>
+    </div>
+    <script>
+      (function () {
+        var clave = "bienvenida-pinterest-vista";
+        try {
+          if (localStorage.getItem(clave)) return;
+        } catch (err) {}
+
+        var params = new URLSearchParams(window.location.search);
+        var vieneDePinterest =
+          params.get("utm_source") === "pinterest" ||
+          (document.referrer && document.referrer.indexOf("pinterest.") !== -1);
+
+        if (!vieneDePinterest) return;
+
+        var caja = document.getElementById("bienvenida-pinterest");
+        if (!caja) return;
+        caja.hidden = false;
+
+        try {
+          localStorage.setItem(clave, "1");
+        } catch (err) {}
+
+        var boton = document.getElementById("bienvenida-pinterest-cerrar");
+        boton.addEventListener("click", function () {
+          caja.hidden = true;
+        });
+      })();
+    </script>
     {% include "partials/header.njk" %}
     <main class="contenido">
       {{ content | safe }}
