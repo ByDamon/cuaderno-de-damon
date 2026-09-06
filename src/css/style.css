@@ -541,71 +541,159 @@ a:hover {
   display: none;
 }
 
-/* ---------- Bienvenida especial (según de dónde venga el visitante) ---------- */
-.bienvenida-especial {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  margin: 0 0 28px;
-  padding: 12px 130px 12px 18px;
-  background: var(--papel-oscuro);
-  border: 1.5px dashed var(--acento-suave);
-  border-radius: 4px;
-  animation: aparecer 0.5s ease-out both;
+@media (max-width: 560px) {
+  .aviso {
+    padding: 10px 96px 10px 12px;
+  }
+
+  .insignia-beta + .aviso {
+    margin-top: 24px;
+  }
+
+  .aviso__texto {
+    font-size: 0.85rem;
+  }
 }
 
-.bienvenida-especial[hidden] {
+/* ---------- Bienvenida especial (tarjeta emergente según de dónde venga el visitante) ---------- */
+.bienvenida-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.bienvenida-modal[hidden] {
   display: none;
 }
 
-.bienvenida-especial__texto {
-  margin: 0;
-  font-size: 0.92rem;
-  color: var(--tinta);
+.bienvenida-modal__fondo {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 36, 23, 0.5);
+  animation: bienvenida-fondo 0.35s ease-out both;
 }
 
-.bienvenida-especial__texto a {
+.bienvenida-modal__tarjeta {
+  position: relative;
+  max-width: 380px;
+  width: 100%;
+  background: var(--papel);
+  border: 2px dashed var(--acento);
+  border-radius: 10px;
+  padding: 40px 28px 30px;
+  text-align: center;
+  box-shadow: 0 24px 60px -16px rgba(20, 15, 8, 0.5);
+  animation: bienvenida-tarjeta 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes bienvenida-fondo {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bienvenida-tarjeta {
+  from {
+    opacity: 0;
+    transform: scale(0.82) rotate(-6deg) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-1deg) translateY(0);
+  }
+}
+
+.bienvenida-modal__pin {
+  margin: 0 0 6px;
+  font-size: 2.6rem;
+  line-height: 1;
+  animation: bienvenida-pin-cae 0.6s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes bienvenida-pin-cae {
+  from {
+    opacity: 0;
+    transform: translateY(-45px) rotate(-30deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.bienvenida-modal__titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 2rem;
   color: var(--acento);
-  font-weight: 600;
+  margin: 0 0 12px;
 }
 
-.bienvenida-especial__cerrar {
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
+.bienvenida-modal__texto {
+  color: var(--tinta-suave);
+  line-height: 1.55;
+  margin: 0 0 22px;
+}
+
+.bienvenida-modal__boton {
+  display: inline-block;
+  background: var(--acento);
+  color: #fbf3e6;
+  padding: 11px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 6px 14px -8px var(--sombra);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.bienvenida-modal__boton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -10px var(--sombra);
+  filter: brightness(1.08);
+}
+
+.bienvenida-modal__cerrar {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: none;
   background: transparent;
   color: var(--tinta-suave);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   line-height: 1;
   cursor: pointer;
   border-radius: 50%;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.bienvenida-especial__cerrar:hover {
+.bienvenida-modal__cerrar:hover {
   background: rgba(44, 36, 23, 0.08);
   color: var(--acento);
 }
 
 @media (max-width: 560px) {
-  .aviso,
-  .bienvenida-especial {
-    padding: 10px 96px 10px 12px;
+  .bienvenida-modal__tarjeta {
+    padding: 36px 22px 26px;
   }
 
-  .insignia-beta + .aviso,
-  .insignia-beta + .bienvenida-especial {
-    margin-top: 24px;
+  .bienvenida-modal__titulo {
+    font-size: 1.7rem;
   }
 
-  .aviso__texto,
-  .bienvenida-especial__texto {
-    font-size: 0.85rem;
+  .bienvenida-modal__texto {
+    font-size: 0.92rem;
   }
 }
 

@@ -78,44 +78,54 @@
       })();
     </script>
     {% endif %}
-    <div class="bienvenida-especial" id="bienvenida-pinterest" hidden>
-      <p class="bienvenida-especial__texto">📌 Llegaste desde Pinterest — bienvenido al cuaderno. <a href="/entradas/">Explora más entradas →</a></p>
-      <button type="button" class="bienvenida-especial__cerrar" id="bienvenida-pinterest-cerrar" aria-label="Cerrar">×</button>
-    </div>
-    <script>
-      (function () {
-        var clave = "bienvenida-pinterest-vista";
-        try {
-          if (localStorage.getItem(clave)) return;
-        } catch (err) {}
-
-        var params = new URLSearchParams(window.location.search);
-        var vieneDePinterest =
-          params.get("utm_source") === "pinterest" ||
-          (document.referrer && document.referrer.indexOf("pinterest.") !== -1);
-
-        if (!vieneDePinterest) return;
-
-        var caja = document.getElementById("bienvenida-pinterest");
-        if (!caja) return;
-        caja.hidden = false;
-
-        try {
-          localStorage.setItem(clave, "1");
-        } catch (err) {}
-
-        var boton = document.getElementById("bienvenida-pinterest-cerrar");
-        boton.addEventListener("click", function () {
-          caja.hidden = true;
-        });
-      })();
-    </script>
     {% include "partials/header.njk" %}
     <main class="contenido">
       {{ content | safe }}
     </main>
     {% include "partials/footer.njk" %}
   </div>
+  <div class="bienvenida-modal" id="bienvenida-pinterest" hidden>
+    <div class="bienvenida-modal__fondo" id="bienvenida-pinterest-fondo"></div>
+    <div class="bienvenida-modal__tarjeta" role="dialog" aria-label="Bienvenida desde Pinterest">
+      <button type="button" class="bienvenida-modal__cerrar" id="bienvenida-pinterest-cerrar" aria-label="Cerrar">×</button>
+      <p class="bienvenida-modal__pin" aria-hidden="true">📌</p>
+      <h2 class="bienvenida-modal__titulo">¡Llegaste desde Pinterest!</h2>
+      <p class="bienvenida-modal__texto">Bienvenido al cuaderno — aquí guardo curiosidades de ciencia, medicina y universo, explicadas simple. Dale una vuelta:</p>
+      <a href="/entradas/" class="bienvenida-modal__boton">Explorar el cuaderno →</a>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var clave = "bienvenida-pinterest-vista";
+      try {
+        if (localStorage.getItem(clave)) return;
+      } catch (err) {}
+
+      var params = new URLSearchParams(window.location.search);
+      var vieneDePinterest =
+        params.get("utm_source") === "pinterest" ||
+        (document.referrer && document.referrer.indexOf("pinterest.") !== -1);
+
+      if (!vieneDePinterest) return;
+
+      var modal = document.getElementById("bienvenida-pinterest");
+      if (!modal) return;
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+
+      try {
+        localStorage.setItem(clave, "1");
+      } catch (err) {}
+
+      function cerrar() {
+        modal.hidden = true;
+        document.body.style.overflow = "";
+      }
+
+      document.getElementById("bienvenida-pinterest-cerrar").addEventListener("click", cerrar);
+      document.getElementById("bienvenida-pinterest-fondo").addEventListener("click", cerrar);
+    })();
+  </script>
   <script>
     (function () {
       var boton = document.getElementById("boton-sorpresa");
