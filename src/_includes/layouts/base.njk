@@ -35,7 +35,9 @@
 </head>
 <body>
   <div class="pagina">
-    <span class="insignia-beta">✏️ Beta</span>
+    <div class="insignia-beta" aria-hidden="true">
+      <span class="insignia-beta__cinta">✏️ Beta</span>
+    </div>
     {% if site.aviso %}
     <div class="aviso" id="aviso" data-aviso-texto="{{ site.aviso }}">
       <div class="aviso__marquee">

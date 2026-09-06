@@ -552,37 +552,51 @@ a:hover {
   }
 }
 
-/* ---------- Insignia Beta (etiqueta tipo sticker, en toda la web) ---------- */
+/* ---------- Insignia Beta (cinta de esquina, en toda la web) ---------- */
 .insignia-beta {
   position: absolute;
-  top: 22px;
-  right: 22px;
+  top: 0;
+  right: 0;
+  width: 112px;
+  height: 112px;
+  overflow: hidden;
   z-index: 5;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 16px;
-  background: var(--papel-oscuro);
-  border: 1.5px dashed var(--acento);
-  border-radius: 7px;
-  font-family: var(--fuente-cuerpo);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--acento);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 2px 4px 8px -3px var(--sombra);
-  transform: rotate(-4deg);
   pointer-events: none;
   animation: aparecer 0.6s ease-out 0.3s both;
 }
 
+.insignia-beta__cinta {
+  position: absolute;
+  top: 25px;
+  right: -33px;
+  width: 152px;
+  padding: 6px 0;
+  background: var(--papel-oscuro);
+  border-top: 1.5px dashed var(--acento);
+  border-bottom: 1.5px dashed var(--acento);
+  box-shadow: 0 2px 6px -1px var(--sombra);
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--acento);
+  text-align: center;
+  transform: rotate(45deg);
+}
+
 @media (max-width: 560px) {
   .insignia-beta {
-    top: 14px;
-    right: 14px;
-    font-size: 0.68rem;
-    padding: 5px 12px;
+    width: 84px;
+    height: 84px;
+  }
+
+  .insignia-beta__cinta {
+    top: 15px;
+    right: -27px;
+    width: 118px;
+    padding: 4px 0;
+    font-size: 0.62rem;
   }
 }
 
