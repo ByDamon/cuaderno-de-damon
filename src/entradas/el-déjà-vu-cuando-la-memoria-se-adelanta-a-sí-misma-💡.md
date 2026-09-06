@@ -79,6 +79,7 @@ puente: >-
   **Agradecimiento:** Gracias, **Frida.** Llegaste, viste el cuaderno, y tu primera reacción fue aportar. El déjà vu ya está en el cuaderno gracias a ti. ✨
 relacionadas:
   - el-cerebro-que-se-engaña-a-sí-mismo-🧠
+  - polvo-de-estrellas-🌟
 reflexion: >-
   El déjà vu nos recuerda que nuestra experiencia del mundo no es tan sólida
   como creemos. La memoria no es un grabado, es una construcción. Y a veces, las
