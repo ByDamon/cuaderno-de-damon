@@ -49,6 +49,8 @@ export default async () => {
   const remitente = process.env.CORREO_REMITENTE;
   const sitioUrl = process.env.URL || "https://cuadernodedamon.netlify.app";
 
+  console.log(`sitioUrl=${sitioUrl} apiKey=${apiKey ? "definida" : "FALTA"} remitente=${remitente || "FALTA"}`);
+
   if (!apiKey || !remitente) {
     console.log("Faltan RESEND_API_KEY o CORREO_REMITENTE; se omite esta ronda de avisos.");
     return new Response("ok");
@@ -65,26 +67,36 @@ export default async () => {
   }
 
   const items = extraerItems(xml);
+  console.log(`Entradas encontradas en el feed: ${items.length}`);
 
   const storeEstado = getStore("estado-notificaciones");
   const yaNotificadas = (await storeEstado.get("guids", { type: "json" })) || [];
   const yaNotificadasSet = new Set(yaNotificadas);
+  console.log(`Ya marcadas como notificadas: ${yaNotificadas.length}`);
 
   const nuevas = items.filter((item) => !yaNotificadasSet.has(item.guid));
+  console.log(`Nuevas por avisar: ${nuevas.length}`, nuevas.map((n) => n.titulo));
 
   // Primera vez que corre esta función: no manda un correo por cada entrada
   // vieja, solo marca todo como "ya visto" y arranca a avisar desde aquí.
   if (!yaNotificadas.length && items.length) {
+    console.log("Primera corrida: marcando entradas actuales como ya vistas, sin enviar correos.");
     await storeEstado.setJSON("guids", items.map((item) => item.guid));
     return new Response("ok");
   }
 
   if (!nuevas.length) {
+    console.log("No hay entradas nuevas que avisar.");
     return new Response("ok");
   }
 
   const storeSuscriptores = getStore("suscriptores");
   const suscriptores = (await storeSuscriptores.get("lista", { type: "json" })) || [];
+  console.log(`Suscriptores guardados: ${suscriptores.length}`, suscriptores);
+
+  if (!suscriptores.length) {
+    console.log("Hay entradas nuevas pero no hay suscriptores guardados; no se manda nada.");
+  }
 
   if (suscriptores.length) {
     for (const item of nuevas.reverse()) {
@@ -110,6 +122,7 @@ export default async () => {
           asunto: `📖 Nueva entrada: ${item.titulo}`,
           html: htmlPersonalizado,
         });
+        console.log(`Correo enviado (o intentado) a ${correo} sobre "${item.titulo}"`);
       }
     }
   }
