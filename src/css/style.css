@@ -282,7 +282,7 @@ a:hover {
   97% { transform: rotate(0deg); }
 }
 
-/* ---------- Suscripción por correo (en el pie) ---------- */
+/* ---------- Suscripción por correo ---------- */
 .suscripcion {
   margin: 0 0 24px;
   padding: 16px 20px;
@@ -290,6 +290,33 @@ a:hover {
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.35);
   text-align: center;
+}
+
+.suscripcion--entrada {
+  margin: 34px 0 6px;
+  animation: aparecer 0.6s ease-out 0.5s both;
+}
+
+.suscripcion--destacada {
+  margin: 0 0 44px;
+  padding: 26px 28px;
+  border: 1.5px dashed var(--acento);
+  border-radius: 6px;
+  background: var(--papel-oscuro);
+  box-shadow: 2px 4px 10px -4px var(--sombra);
+  animation: aparecer 0.5s ease-out 0.1s both;
+}
+
+.suscripcion--destacada .suscripcion__texto {
+  font-family: var(--fuente-titulo);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--acento);
+  margin-bottom: 16px;
+}
+
+.suscripcion--destacada .suscripcion__form input[type="email"] {
+  min-width: 260px;
 }
 
 .suscripcion__texto {

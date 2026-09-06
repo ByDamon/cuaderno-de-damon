@@ -1,0 +1,57 @@
+<div class="suscripcion{% if variante %} suscripcion--{{ variante }}{% endif %}">
+  <p class="suscripcion__texto">{{ texto or "📬 ¿Quieres que te avise por correo cuando publique una entrada nueva?" }}</p>
+  <form class="suscripcion__form" data-suscripcion-form>
+    <label class="sr-solo">Tu correo</label>
+    <input type="email" name="email" placeholder="tu@correo.com" required />
+    <button type="submit">Suscribirme</button>
+  </form>
+  <p class="suscripcion__mensaje" data-suscripcion-mensaje hidden></p>
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll("[data-suscripcion-form]").forEach(function (form) {
+      if (form.dataset.listo) return;
+      form.dataset.listo = "1";
+
+      var contenedor = form.closest(".suscripcion");
+      var mensaje = contenedor ? contenedor.querySelector("[data-suscripcion-mensaje]") : null;
+      if (!mensaje) return;
+
+      form.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+        var boton = form.querySelector("button");
+        boton.disabled = true;
+
+        var datos = new URLSearchParams(new FormData(form)).toString();
+
+        fetch("/.netlify/functions/suscribir", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: datos,
+        })
+          .then(function (respuesta) {
+            return respuesta.json().then(function (cuerpo) {
+              return { ok: respuesta.ok, cuerpo: cuerpo };
+            });
+          })
+          .then(function (resultado) {
+            if (resultado.ok && resultado.cuerpo.ok) {
+              form.hidden = true;
+              mensaje.textContent = "💌 ¡Listo! Te voy a avisar cuando publique algo nuevo.";
+              mensaje.hidden = false;
+            } else {
+              mensaje.textContent = "⚠️ " + (resultado.cuerpo.error || "No se pudo suscribir. Intenta de nuevo.");
+              mensaje.hidden = false;
+              boton.disabled = false;
+            }
+          })
+          .catch(function () {
+            mensaje.textContent = "⚠️ No se pudo conectar. Intenta de nuevo en un momento.";
+            mensaje.hidden = false;
+            boton.disabled = false;
+          });
+      });
+    });
+  })();
+</script>

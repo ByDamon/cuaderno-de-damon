@@ -73,6 +73,9 @@ layout: layouts/base.njk
       <div class="reflexion__texto">{{ reflexion | markdown | safe }}</div>
     </section>
     {% endif %}
+
+    {% set variante = "entrada" %}
+    {% include "partials/suscripcion.njk" %}
   </div>
 </article>
 
