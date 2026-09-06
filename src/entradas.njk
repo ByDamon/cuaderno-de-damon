@@ -16,11 +16,13 @@ permalink: /entradas/
   <ul class="lista-entradas">
     {% for entrada in collections.entradas %}
     {% set cat = entrada.data.categoria | categoriaInfo %}
+    {% set mad = entrada.data.madurez | madurezInfo %}
     <li class="lista-entradas__item" data-categoria="{{ cat.slug }}" style="--color-cat: {{ cat.color }};">
       <a href="{{ entrada.url }}">
         <span class="lista-entradas__titulo" style="view-transition-name: titulo-{{ entrada.fileSlug }};">{{ entrada.data.title }}</span>
         <span class="lista-entradas__meta">
           <span class="lista-entradas__categoria">{{ cat.emoji }} {{ cat.nombre }}</span>
+          <span class="lista-entradas__madurez" style="--color-mad: {{ mad.color }};">{{ mad.emoji }} {{ mad.etiqueta }}</span>
           <span class="lista-entradas__fecha">{{ entrada.data.date | fechaCorta }}</span>
         </span>
       </a>

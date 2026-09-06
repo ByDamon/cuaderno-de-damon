@@ -32,6 +32,16 @@ function buscarCategoria(slug) {
   );
 }
 
+const MADUREZ = {
+  boceto: { emoji: "🌱", etiqueta: "Idea en boceto", color: "#8a9a5b" },
+  desarrollo: { emoji: "🌿", etiqueta: "En desarrollo", color: "#5c8a52" },
+  madura: { emoji: "🌳", etiqueta: "Idea madura", color: "#3d6b3d" },
+};
+
+function buscarMadurez(slug) {
+  return MADUREZ[slug] || MADUREZ.madura;
+}
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
 
@@ -58,6 +68,8 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("categoriaInfo", buscarCategoria);
+
+  eleventyConfig.addFilter("madurezInfo", buscarMadurez);
 
   eleventyConfig.addFilter(
     "tiempoLectura",

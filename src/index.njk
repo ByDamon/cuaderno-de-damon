@@ -116,11 +116,12 @@ titulo: Cuaderno de Damon — Portada
     {% for entrada in collections.entradas %}
       {% if loop.index <= 4 %}
       {% set cat = entrada.data.categoria | categoriaInfo %}
+      {% set mad = entrada.data.madurez | madurezInfo %}
       <a class="tarjeta" href="{{ entrada.url }}" style="--color-cat: {{ cat.color }}; --color-cat-suave: {{ cat.colorSuave }};">
         <p class="tarjeta__categoria">{{ cat.emoji }} {{ cat.nombre }}</p>
         <h3 class="tarjeta__titulo" style="view-transition-name: titulo-{{ entrada.fileSlug }};">{{ entrada.data.title }}</h3>
         <p class="tarjeta__resumen">{{ entrada.data.resumen }}</p>
-        <p class="tarjeta__fecha">{{ entrada.data.date | fechaCorta }}</p>
+        <p class="tarjeta__fecha">{{ entrada.data.date | fechaCorta }} · <span class="tarjeta__madurez" style="--color-mad: {{ mad.color }};">{{ mad.emoji }} {{ mad.etiqueta }}</span></p>
       </a>
       {% endif %}
     {% endfor %}

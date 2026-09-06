@@ -2,6 +2,7 @@
 layout: layouts/base.njk
 ---
 {% set cat = categoria | categoriaInfo %}
+{% set mad = madurez | madurezInfo %}
 <div class="progreso-lectura" aria-hidden="true" style="--color-cat: {{ cat.color }};">
   <div class="progreso-lectura__barra"></div>
 </div>
@@ -16,6 +17,7 @@ layout: layouts/base.njk
     <p class="hoja__fecha">
       {{ date | fechaLarga }} · {{ explicacion | tiempoLectura(analogia, puente, reflexion, content) }}
     </p>
+    <p class="hoja__madurez" style="--color-mad: {{ mad.color }};">{{ mad.emoji }} {{ mad.etiqueta }}</p>
     {% if tags %}
     <ul class="hoja__tags">
       {% for tag in tags %}

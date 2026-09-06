@@ -911,6 +911,25 @@ a:hover {
   font-style: italic;
 }
 
+.hoja__madurez {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0 0;
+  padding: 4px 12px;
+  border: 1.3px dashed var(--color-mad, var(--acento-suave));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  font-size: 0.75rem;
+  color: var(--color-mad, var(--tinta-suave));
+  font-weight: 600;
+}
+
+.tarjeta__madurez,
+.lista-entradas__madurez {
+  color: var(--color-mad, var(--tinta-suave));
+}
+
 .hoja__tags {
   list-style: none;
   display: flex;

@@ -27,6 +27,15 @@ collections:
           - { label: "🟢 Ciencia general", value: "ciencia" }
           - { label: "🟡 Reflexiones", value: "reflexiones" }
           - { label: "🟠 Tecnología y futuro", value: "tecnologia" }
+      - label: "Madurez de la idea"
+        name: "madurez"
+        widget: "select"
+        default: "desarrollo"
+        options:
+          - { label: "🌱 Idea en boceto", value: "boceto" }
+          - { label: "🌿 En desarrollo", value: "desarrollo" }
+          - { label: "🌳 Idea madura", value: "madura" }
+        hint: "¿Qué tan tendida está esta idea? Puedes subirla de nivel cuando la vuelvas a trabajar."
       - label: "Fecha"
         name: "date"
         widget: "datetime"
