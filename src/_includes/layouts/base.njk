@@ -38,7 +38,12 @@
     <span class="insignia-beta">✏️ Beta</span>
     {% if site.aviso %}
     <div class="aviso" id="aviso" data-aviso-texto="{{ site.aviso }}">
-      <p class="aviso__texto">📌 {{ site.aviso }}</p>
+      <div class="aviso__marquee">
+        <div class="aviso__pista" id="aviso-pista">
+          <span class="aviso__texto">📌 {{ site.aviso }}&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span class="aviso__texto" aria-hidden="true">📌 {{ site.aviso }}&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </div>
+      </div>
       <button type="button" class="aviso__cerrar" id="aviso-cerrar" aria-label="Cerrar aviso">×</button>
     </div>
     <script>
@@ -52,6 +57,14 @@
             el.hidden = true;
           }
         } catch (err) {}
+
+        var pista = document.getElementById("aviso-pista");
+        if (pista && !el.hidden) {
+          var ancho = pista.scrollWidth / 2;
+          var velocidad = 42;
+          var duracion = Math.max(9, ancho / velocidad);
+          pista.style.animationDuration = duracion + "s";
+        }
 
         var boton = document.getElementById("aviso-cerrar");
         boton.addEventListener("click", function () {
