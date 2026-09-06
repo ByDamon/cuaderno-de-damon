@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+titulo: Glosario A-Z — Cuaderno de Damon
+permalink: /glosario/
+---
+{% set grupos = collections.entradas | alfabetico %}
+{% set letrasConEntradas = collections.entradas | letrasConEntradas %}
+<section class="glosario">
+  <h1 class="glosario__titulo">Glosario A-Z</h1>
+  <p class="glosario__intro">
+    Las mismas entradas, ordenadas como el índice de un libro real: por la
+    primera letra de su título, sin importar cuándo se escribieron ni de
+    qué categoría son.
+  </p>
+
+  {% if grupos.length %}
+  <nav class="glosario__saltos" aria-label="Ir a una letra">
+    {% for letra in alfabeto %}
+      {% if letra in letrasConEntradas %}
+      <a href="#letra-{{ letra }}">{{ letra }}</a>
+      {% else %}
+      <span class="glosario__letra-vacia">{{ letra }}</span>
+      {% endif %}
+    {% endfor %}
+  </nav>
+
+  {% for grupo in grupos %}
+  <div class="glosario__grupo">
+    <h2 class="glosario__letra" id="letra-{{ grupo.letra }}">{{ grupo.letra }}</h2>
+    <ul class="glosario__lista">
+      {% for entrada in grupo.entradas %}
+      {% set cat = entrada.data.categoria | categoriaInfo %}
+      <li>
+        <a href="{{ entrada.url }}" style="--color-cat: {{ cat.color }};">
+          <span class="glosario__punto" aria-hidden="true"></span>
+          {{ entrada.data.title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+  {% else %}
+  <p class="glosario__vacio">Todavía no hay entradas para listar aquí.</p>
+  {% endif %}
+</section>

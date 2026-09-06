@@ -12,6 +12,13 @@ function contarPalabras(texto) {
   return limpio.trim().split(/\s+/).filter(Boolean).length;
 }
 
+const MAPA_ACENTOS = { Á: "A", É: "E", Í: "I", Ó: "O", Ú: "U", Ü: "U" };
+
+function letraInicial(titulo) {
+  const letra = titulo.trim().charAt(0).toUpperCase();
+  return MAPA_ACENTOS[letra] || letra;
+}
+
 function buscarCategoria(slug) {
   return (
     categorias.find((c) => c.slug === slug) || {
@@ -76,7 +83,37 @@ module.exports = function (eleventyConfig) {
       .filter(Boolean);
   });
 
+  eleventyConfig.addFilter("alfabetico", (entradas) => {
+    if (!entradas || !entradas.length) return [];
+    const ordenadas = [...entradas].sort((a, b) =>
+      a.data.title.trim().localeCompare(b.data.title.trim(), "es", { sensitivity: "base" })
+    );
+    const grupos = [];
+    let actual = null;
+    ordenadas.forEach((entrada) => {
+      const letra = letraInicial(entrada.data.title);
+      if (!actual || actual.letra !== letra) {
+        actual = { letra, entradas: [] };
+        grupos.push(actual);
+      }
+      actual.entradas.push(entrada);
+    });
+    return grupos;
+  });
+
+  eleventyConfig.addFilter("letrasConEntradas", (entradas) => {
+    if (!entradas) return [];
+    const set = new Set();
+    entradas.forEach((e) => set.add(letraInicial(e.data.title)));
+    return Array.from(set);
+  });
+
   eleventyConfig.addGlobalData("anioActual", () => new Date().getFullYear());
+
+  eleventyConfig.addGlobalData("alfabeto", () => [
+    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+    "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+  ]);
 
   eleventyConfig.addCollection("entradas", (collectionApi) => {
     return collectionApi.getFilteredByGlob("src/entradas/*.md").sort((a, b) => {
