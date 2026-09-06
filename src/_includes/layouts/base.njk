@@ -36,6 +36,33 @@
 <body>
   <div class="pagina">
     <span class="insignia-beta">✏️ Beta</span>
+    {% if site.aviso %}
+    <div class="aviso" id="aviso" data-aviso-texto="{{ site.aviso }}">
+      <p class="aviso__texto">📌 {{ site.aviso }}</p>
+      <button type="button" class="aviso__cerrar" id="aviso-cerrar" aria-label="Cerrar aviso">×</button>
+    </div>
+    <script>
+      (function () {
+        var el = document.getElementById("aviso");
+        if (!el) return;
+        var clave = "aviso-cerrado";
+        var texto = el.dataset.avisoTexto;
+        try {
+          if (localStorage.getItem(clave) === texto) {
+            el.hidden = true;
+          }
+        } catch (err) {}
+
+        var boton = document.getElementById("aviso-cerrar");
+        boton.addEventListener("click", function () {
+          el.hidden = true;
+          try {
+            localStorage.setItem(clave, texto);
+          } catch (err) {}
+        });
+      })();
+    </script>
+    {% endif %}
     {% include "partials/header.njk" %}
     <main class="contenido">
       {{ content | safe }}

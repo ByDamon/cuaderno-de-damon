@@ -102,3 +102,8 @@ collections:
           - { label: "URL del sitio", name: "url", widget: "string" }
           - { label: "Instagram (link completo)", name: "instagramUrl", widget: "string", required: false }
           - { label: "X / Twitter (link completo)", name: "xUrl", widget: "string", required: false }
+          - label: "Aviso o novedad"
+            name: "aviso"
+            widget: "text"
+            required: false
+            hint: "Aparece como una notita en la parte de arriba de todas las páginas, con una X para cerrarla. Déjalo vacío para que no se muestre. Si cambias el texto, la notita vuelve a aparecer aunque el lector ya la haya cerrado antes."
