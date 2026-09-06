@@ -32,6 +32,16 @@ permalink: /sobre/
     {% endfor %}
   </ul>
 
+  {% set madBoceto = "boceto" | madurezInfo %}
+  {% set madDesarrollo = "desarrollo" | madurezInfo %}
+  {% set madMadura = "madura" | madurezInfo %}
+  <p class="sobre__madurez-intro">Y junto a la fecha, una hojita cuenta qué tan crecida está la idea todavía:</p>
+  <ul class="sobre__madurez">
+    <li><span class="hoja__madurez" style="--color-mad: {{ madBoceto.color }};">{{ madBoceto.emoji }} {{ madBoceto.etiqueta }}</span> la acabo de anotar.</li>
+    <li><span class="hoja__madurez" style="--color-mad: {{ madDesarrollo.color }};">{{ madDesarrollo.emoji }} {{ madDesarrollo.etiqueta }}</span> la sigo masticando.</li>
+    <li><span class="hoja__madurez" style="--color-mad: {{ madMadura.color }};">{{ madMadura.emoji }} {{ madMadura.etiqueta }}</span> ya se siente asentada, por ahora.</li>
+  </ul>
+
   <h2 class="sobre__subtitulo">¿Por qué hago esto?</h2>
   <p>
     Porque vivimos ahogados en información instantánea pero sedientos de
