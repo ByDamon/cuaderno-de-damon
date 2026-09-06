@@ -1,5 +1,5 @@
 ---
-title: "El déjà vu: cuando la memoria se adelanta a sí misma 💡"
+title: "EL DÉJÀ VU: CUANDO LA MEMORIA SE ADELANTA A SÍ MISMA 💡"
 categoria: medicina
 date: 2026-09-06
 resumen: El déjà vu es como cuando tu cerebro te dice "esto ya lo viviste", pero
