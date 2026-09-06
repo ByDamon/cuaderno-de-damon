@@ -1,5 +1,5 @@
 ---
-title: "El CÁNCER: ESA PREGUNTA QUE NO NOS DEJA DORMIR🌙"
+title: "El CÁNCER: ESA PREGUNTA QUE NO NOS DEJA DORMIR🌗"
 categoria: medicina
 date: 2026-09-05
 resumen: El cáncer es como si dentro de tu cuerpo algunas células se volvieran
