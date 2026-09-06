@@ -115,6 +115,9 @@ puente: >-
 
 
   Buda decía que el apego es la raíz del sufrimiento. Pero también decía que el camino medio es no aferrarse, no odiar. Amar sin pos
+relacionadas:
+  - polvo-de-estrellas-🌟
+  - el-cerebro-que-se-engaña-a-sí-mismo-🧠
 reflexion: >-
   "El amor no es solo poesía. Es dopamina, oxitocina, y una pequeña suspensión
   del juicio. Saber esto no lo hace menos mágico. Lo hace más real."
