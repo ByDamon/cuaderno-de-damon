@@ -348,6 +348,16 @@ a:hover {
   transform: translateY(0) scale(0.98);
 }
 
+.suscripcion__form[hidden] {
+  display: none;
+}
+
+.suscripcion__mensaje {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: var(--tinta);
+}
+
 .sr-solo {
   position: absolute;
   width: 1px;

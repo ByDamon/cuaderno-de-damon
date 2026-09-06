@@ -1,20 +1,55 @@
 <footer class="pie">
-  {% if site.buttondownUsername %}
-  <div class="suscripcion">
+  <div class="suscripcion" id="suscripcion">
     <p class="suscripcion__texto">📬 ¿Quieres que te avise por correo cuando publique una entrada nueva?</p>
-    <form
-      action="https://buttondown.com/api/emails/embed-subscribe/{{ site.buttondownUsername }}"
-      method="post"
-      target="popupwindow"
-      onsubmit="window.open('https://buttondown.com/{{ site.buttondownUsername }}', 'popupwindow')"
-      class="suscripcion__form"
-    >
+    <form class="suscripcion__form" id="suscripcion-form">
       <label for="suscripcion-correo" class="sr-solo">Tu correo</label>
       <input type="email" name="email" id="suscripcion-correo" placeholder="tu@correo.com" required />
-      <input type="hidden" value="1" name="embed" />
       <button type="submit">Suscribirme</button>
     </form>
+    <p class="suscripcion__mensaje" id="suscripcion-mensaje" hidden></p>
   </div>
-  {% endif %}
   <p>Escrito y encuadernado por {{ site.autor }} · {{ anioActual }}</p>
 </footer>
+
+<script>
+  (function () {
+    var form = document.getElementById("suscripcion-form");
+    var mensaje = document.getElementById("suscripcion-mensaje");
+    if (!form || !mensaje) return;
+
+    form.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+      var boton = form.querySelector("button");
+      boton.disabled = true;
+
+      var datos = new URLSearchParams(new FormData(form)).toString();
+
+      fetch("/.netlify/functions/suscribir", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: datos,
+      })
+        .then(function (respuesta) {
+          return respuesta.json().then(function (cuerpo) {
+            return { ok: respuesta.ok, cuerpo: cuerpo };
+          });
+        })
+        .then(function (resultado) {
+          if (resultado.ok && resultado.cuerpo.ok) {
+            form.hidden = true;
+            mensaje.textContent = "💌 ¡Listo! Te voy a avisar cuando publique algo nuevo.";
+            mensaje.hidden = false;
+          } else {
+            mensaje.textContent = "⚠️ " + (resultado.cuerpo.error || "No se pudo suscribir. Intenta de nuevo.");
+            mensaje.hidden = false;
+            boton.disabled = false;
+          }
+        })
+        .catch(function () {
+          mensaje.textContent = "⚠️ No se pudo conectar. Intenta de nuevo en un momento.";
+          mensaje.hidden = false;
+          boton.disabled = false;
+        });
+    });
+  })();
+</script>
