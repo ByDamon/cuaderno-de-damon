@@ -1,5 +1,6 @@
 const { DateTime } = require("luxon");
 const MarkdownIt = require("markdown-it");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 const categorias = require("./src/_data/categorias.js");
 
 const md = new MarkdownIt({ html: false, breaks: false });
@@ -32,6 +33,8 @@ function buscarCategoria(slug) {
 }
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPlugin(pluginRss);
+
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/admin");

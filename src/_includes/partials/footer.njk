@@ -1,3 +1,20 @@
 <footer class="pie">
+  {% if site.buttondownUsername %}
+  <div class="suscripcion">
+    <p class="suscripcion__texto">📬 ¿Quieres que te avise por correo cuando publique una entrada nueva?</p>
+    <form
+      action="https://buttondown.com/api/emails/embed-subscribe/{{ site.buttondownUsername }}"
+      method="post"
+      target="popupwindow"
+      onsubmit="window.open('https://buttondown.com/{{ site.buttondownUsername }}', 'popupwindow')"
+      class="suscripcion__form"
+    >
+      <label for="suscripcion-correo" class="sr-solo">Tu correo</label>
+      <input type="email" name="email" id="suscripcion-correo" placeholder="tu@correo.com" required />
+      <input type="hidden" value="1" name="embed" />
+      <button type="submit">Suscribirme</button>
+    </form>
+  </div>
+  {% endif %}
   <p>Escrito y encuadernado por {{ site.autor }} · {{ anioActual }}</p>
 </footer>

@@ -91,3 +91,8 @@ collections:
               widget: "text",
             }
           - { label: "URL del sitio", name: "url", widget: "string" }
+          - label: "Usuario de Buttondown (para el aviso de entradas nuevas por correo)"
+            name: "buttondownUsername"
+            widget: "string"
+            required: false
+            hint: "El nombre de usuario de tu cuenta en buttondown.com (por ejemplo, si tu página ahí es buttondown.com/damon, pon 'damon'). Déjalo vacío para ocultar el cuadro de suscripción."
