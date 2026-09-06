@@ -91,3 +91,5 @@ collections:
               widget: "text",
             }
           - { label: "URL del sitio", name: "url", widget: "string" }
+          - { label: "Instagram (link completo)", name: "instagramUrl", widget: "string", required: false }
+          - { label: "X / Twitter (link completo)", name: "xUrl", widget: "string", required: false }

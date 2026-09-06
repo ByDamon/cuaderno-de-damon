@@ -407,6 +407,30 @@ a:hover {
   color: var(--tinta-suave);
 }
 
+.pie__redes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 14px 0 0;
+}
+
+.pie__redes a {
+  display: inline-flex;
+  color: var(--tinta-suave);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.pie__redes a:hover {
+  color: var(--acento);
+  transform: translateY(-2px);
+}
+
+.pie__redes svg {
+  width: 19px;
+  height: 19px;
+}
+
 /* ---------- Insignia Beta (etiqueta tipo sticker, en toda la web) ---------- */
 .insignia-beta {
   position: absolute;
