@@ -50,6 +50,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/admin");
   eleventyConfig.addPassthroughCopy("src/js");
 
+  eleventyConfig.addFilter("dateToIso", (fecha) => {
+    return DateTime.fromJSDate(fecha, { zone: "utc" }).toISODate();
+  });
+
   eleventyConfig.addFilter("fechaLarga", (fecha) => {
     return DateTime.fromJSDate(fecha, { zone: "utc" })
       .setLocale("es")
