@@ -86,6 +86,8 @@ puente: >-
 
 
   ¿Podremos algún día construir telescopios tan potentes que vean exoplanetas con detalles? ¿O la velocidad de la luz nos condena a ver solo el pasado?
+relacionadas:
+  - polvo-de-estrellas-🌟
 reflexion: >-
   "Cada noche miramos al cielo sin darnos cuenta de que estamos leyendo la
   historia del universo. Las estrellas no están ahí. Estuvieron. Y nosotros,
