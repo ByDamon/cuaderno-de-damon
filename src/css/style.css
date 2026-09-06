@@ -292,6 +292,36 @@ a:hover {
   color: var(--tinta-suave);
 }
 
+/* ---------- Insignia Beta (solo portada) ---------- */
+.insignia-beta {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 4px 12px;
+  border: 1.5px solid var(--acento);
+  border-radius: 999px;
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--acento);
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(5deg);
+  opacity: 0.85;
+  pointer-events: none;
+  animation: aparecer 0.6s ease-out 0.3s both;
+}
+
+@media (max-width: 520px) {
+  .insignia-beta {
+    top: 12px;
+    right: 12px;
+    font-size: 0.6rem;
+    padding: 3px 9px;
+  }
+}
+
 /* ---------- Portada ---------- */
 .portada__intro {
   font-size: 1.1rem;
