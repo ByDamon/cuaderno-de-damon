@@ -830,8 +830,30 @@ a:hover {
   font-size: 1.1rem;
   color: var(--tinta-suave);
   max-width: 60ch;
+  margin: 0 auto 14px;
+  text-align: center;
+}
+
+.portada__lema {
   margin: 0 auto 32px;
   text-align: center;
+  animation: aparecer 0.6s ease-out 0.1s both;
+}
+
+.portada__lema-texto {
+  display: inline-block;
+  font-family: var(--fuente-titulo);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--acento);
+}
+
+.portada__lema-trazo {
+  display: block;
+  width: 110px;
+  max-width: 40%;
+  height: auto;
+  margin: 2px auto 0;
 }
 
 .portada__hero {
