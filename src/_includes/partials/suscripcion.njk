@@ -40,6 +40,7 @@
               form.hidden = true;
               mensaje.textContent = "💌 ¡Listo! Te voy a avisar cuando publique algo nuevo.";
               mensaje.hidden = false;
+              if (typeof enviarEvento === "function") enviarEvento("suscripcion_completada");
             } else {
               mensaje.textContent = "⚠️ " + (resultado.cuerpo.error || "No se pudo suscribir. Intenta de nuevo.");
               mensaje.hidden = false;

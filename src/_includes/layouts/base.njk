@@ -32,6 +32,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GGZTHBCX6D"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GGZTHBCX6D');
+
+    function enviarEvento(nombre, parametros) {
+      if (typeof gtag === "function") gtag("event", nombre, parametros || {});
+    }
+  </script>
 </head>
 <body>
   <div class="pagina">
@@ -149,6 +162,7 @@
       var boton = document.getElementById("boton-sorpresa");
       if (!boton) return;
       boton.addEventListener("click", function () {
+        enviarEvento("click_sorprendeme");
         var urls = JSON.parse(boton.dataset.urls || "[]");
         if (!urls.length) return;
         var actual = decodeURIComponent(window.location.pathname);
@@ -159,6 +173,15 @@
         window.location.href = lista[Math.floor(Math.random() * lista.length)];
       });
     })();
+  </script>
+  <script>
+    document.addEventListener("click", function (evento) {
+      var enlace = evento.target.closest("a");
+      if (!enlace) return;
+      if (!enlace.closest(".pie__redes, .cabecera__redes, .redes-cta__iconos")) return;
+      var red = (enlace.getAttribute("aria-label") || "red").toLowerCase();
+      enviarEvento("click_red_social", { red: red });
+    });
   </script>
   <script id="vista-previa-datos" type="application/json">{{ collections.vistaPrevia | json | safe }}</script>
   <script src="/js/vista-previa.js"></script>
