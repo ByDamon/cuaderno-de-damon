@@ -38,8 +38,15 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
     gtag('js', new Date());
     gtag('config', 'G-GGZTHBCX6D');
+
+    try {
+      if (localStorage.getItem('cookies-decision') === 'aceptado') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+    } catch (err) {}
 
     function enviarEvento(nombre, parametros) {
       if (typeof gtag === "function") gtag("event", nombre, parametros || {});
@@ -97,6 +104,47 @@
     </main>
     {% include "partials/footer.njk" %}
   </div>
+  <div class="cookies-aviso" id="cookies-aviso" hidden>
+    <p class="cookies-aviso__texto">Uso cookies solo para saber qué entradas se leen más (Google Analytics). Nada de anuncios ni venta de datos.</p>
+    <div class="cookies-aviso__botones">
+      <button type="button" id="cookies-rechazar" class="cookies-aviso__boton cookies-aviso__boton--secundario">Rechazar</button>
+      <button type="button" id="cookies-aceptar" class="cookies-aviso__boton">Aceptar</button>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var clave = "cookies-decision";
+      var banner = document.getElementById("cookies-aviso");
+      if (!banner) return;
+
+      var decision;
+      try {
+        decision = localStorage.getItem(clave);
+      } catch (err) {
+        decision = null;
+      }
+      if (decision) return;
+
+      banner.hidden = false;
+
+      function decidir(valor) {
+        banner.hidden = true;
+        try {
+          localStorage.setItem(clave, valor);
+        } catch (err) {}
+        if (valor === "aceptado" && typeof gtag === "function") {
+          gtag("consent", "update", { analytics_storage: "granted" });
+        }
+      }
+
+      document.getElementById("cookies-aceptar").addEventListener("click", function () {
+        decidir("aceptado");
+      });
+      document.getElementById("cookies-rechazar").addEventListener("click", function () {
+        decidir("rechazado");
+      });
+    })();
+  </script>
   <div class="bienvenida-modal" id="bienvenida-social" hidden>
     <div class="bienvenida-modal__fondo" id="bienvenida-social-fondo"></div>
     <div class="bienvenida-modal__tarjeta" role="dialog" aria-label="Bienvenida">
