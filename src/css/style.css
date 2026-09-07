@@ -254,6 +254,43 @@ a:hover {
   gap: 24px;
 }
 
+.cabecera__nav-fila {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.cabecera__redes {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.cabecera__nav .cabecera__redes a {
+  display: inline-flex;
+  color: var(--tinta-suave);
+  border-bottom: none;
+  padding-bottom: 0;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.cabecera__redes a:hover {
+  color: var(--acento);
+  transform: translateY(-2px);
+}
+
+.cabecera__redes svg {
+  width: 17px;
+  height: 17px;
+}
+
 .cabecera__nav a {
   text-decoration: none;
   color: var(--tinta);
@@ -426,29 +463,17 @@ a:hover {
   text-align: center;
 }
 
-.redes-cta--destacada {
-  margin: 8px 0 44px;
-}
-
 .redes-cta--entrada {
-  margin: 8px 0 6px;
+  margin: 14px 0 6px;
   animation: aparecer 0.6s ease-out 0.6s both;
 }
 
 .redes-cta__texto {
-  margin: 0 0 2px;
+  margin: 0 0 12px;
   font-family: var(--fuente-titulo);
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--acento);
-}
-
-.redes-cta__flecha {
-  display: block;
-  width: 16px;
-  height: 13px;
-  margin: 2px auto;
-  opacity: 0.8;
 }
 
 .redes-cta__iconos {
