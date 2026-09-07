@@ -1,6 +1,10 @@
 {% if site.instagramUrl or site.pinterestUrl %}
 <div class="redes-cta{% if variante %} redes-cta--{{ variante }}{% endif %}">
   <p class="redes-cta__texto">📌 Sígueme para verlo crecer</p>
+  <svg class="redes-cta__flecha" viewBox="0 0 60 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M8 4 C 26 2, 6 24, 29 29" fill="none" stroke="var(--acento-suave)" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M19 26 L29 29 L25 39" fill="none" stroke="var(--acento-suave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
   <p class="redes-cta__iconos">
     {% if site.instagramUrl %}
     <a href="{{ site.instagramUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">

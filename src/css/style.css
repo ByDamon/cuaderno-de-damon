@@ -436,11 +436,19 @@ a:hover {
 }
 
 .redes-cta__texto {
-  margin: 0 0 12px;
+  margin: 0 0 2px;
   font-family: var(--fuente-titulo);
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--acento);
+}
+
+.redes-cta__flecha {
+  display: block;
+  width: 34px;
+  height: 26px;
+  margin: 0 auto;
+  opacity: 0.8;
 }
 
 .redes-cta__iconos {
