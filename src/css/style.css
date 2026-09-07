@@ -366,20 +366,14 @@ a:hover {
 
 .suscripcion--entrada {
   margin: 34px 0 6px;
+  padding: 26px 28px;
+  border: 1.5px dashed var(--acento);
+  background: var(--papel-oscuro);
+  box-shadow: 2px 4px 10px -4px var(--sombra);
   animation: aparecer 0.6s ease-out 0.5s both;
 }
 
-.suscripcion--destacada {
-  margin: 0 0 44px;
-  padding: 26px 28px;
-  border: 1.5px dashed var(--acento);
-  border-radius: 6px;
-  background: var(--papel-oscuro);
-  box-shadow: 2px 4px 10px -4px var(--sombra);
-  animation: aparecer 0.5s ease-out 0.1s both;
-}
-
-.suscripcion--destacada .suscripcion__texto {
+.suscripcion--entrada .suscripcion__texto {
   font-family: var(--fuente-titulo);
   font-size: 1.4rem;
   font-weight: 700;
@@ -387,7 +381,7 @@ a:hover {
   margin-bottom: 16px;
 }
 
-.suscripcion--destacada .suscripcion__form input[type="email"] {
+.suscripcion--entrada .suscripcion__form input[type="email"] {
   min-width: 260px;
 }
 
@@ -843,17 +837,17 @@ a:hover {
 .portada__lema-texto {
   display: inline-block;
   font-family: var(--fuente-titulo);
-  font-size: 1.2rem;
+  font-size: clamp(1.6rem, 4.5vw, 2.1rem);
   font-weight: 700;
   color: var(--acento);
 }
 
 .portada__lema-trazo {
   display: block;
-  width: 110px;
-  max-width: 40%;
+  width: 160px;
+  max-width: 50%;
   height: auto;
-  margin: 2px auto 0;
+  margin: 4px auto 0;
 }
 
 .portada__hero {
