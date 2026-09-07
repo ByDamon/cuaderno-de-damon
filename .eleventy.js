@@ -42,6 +42,16 @@ function buscarMadurez(slug) {
   return MADUREZ[slug] || MADUREZ.madura;
 }
 
+function slugificar(texto) {
+  return texto
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(new RegExp("[\\u0300-\\u036f]", "g"), "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
 
@@ -74,6 +84,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("categoriaInfo", buscarCategoria);
 
   eleventyConfig.addFilter("madurezInfo", buscarMadurez);
+
+  eleventyConfig.addFilter("slugSubcategoria", (texto) =>
+    texto ? slugificar(texto) : ""
+  );
 
   eleventyConfig.addFilter(
     "tiempoLectura",
@@ -138,6 +152,23 @@ module.exports = function (eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/entradas/*.md").sort((a, b) => {
       return b.date - a.date;
     });
+  });
+
+  eleventyConfig.addCollection("subcategorias", (collectionApi) => {
+    const entradas = collectionApi.getFilteredByGlob("src/entradas/*.md");
+    const mapa = new Map();
+
+    entradas.forEach((e) => {
+      const texto = (e.data.subcategoria || "").trim();
+      if (!texto) return;
+      const slug = slugificar(texto);
+      if (!slug || mapa.has(slug)) return;
+      mapa.set(slug, { slug, nombre: texto });
+    });
+
+    return Array.from(mapa.values()).sort((a, b) =>
+      a.nombre.localeCompare(b.nombre, "es", { sensitivity: "base" })
+    );
   });
 
   eleventyConfig.addCollection("grafo", (collectionApi) => {

@@ -27,6 +27,11 @@ collections:
           - { label: "🟢 Ciencia general", value: "ciencia" }
           - { label: "🟡 Reflexiones", value: "reflexiones" }
           - { label: "🟠 Tecnología y futuro", value: "tecnologia" }
+      - label: "Subcategoría (opcional)"
+        name: "subcategoria"
+        widget: "string"
+        required: false
+        hint: 'Si crees que este tema merece más detalle, ponle una subcategoría (ej. "Sueño", "Vacunas"). Aparece como un filtro extra en el índice, agrupando esta entrada con otras que tengan la misma.'
       - label: "Madurez de la idea"
         name: "madurez"
         widget: "select"

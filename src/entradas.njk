@@ -7,21 +7,34 @@ permalink: /entradas/
   <h1 class="indice__titulo">Índice de entradas</h1>
 
   <div class="filtros" role="group" aria-label="Filtrar por categoría">
-    <button class="filtro filtro--activo" data-categoria="todas">Todas</button>
+    <button class="filtro filtro--activo" data-filtro="todas">Todas</button>
     {% for cat in categorias %}
-    <button class="filtro" data-categoria="{{ cat.slug }}" style="--color-cat: {{ cat.color }};">{{ cat.emoji }} {{ cat.nombre }}</button>
+    <button class="filtro" data-filtro="{{ cat.slug }}" style="--color-cat: {{ cat.color }};">{{ cat.emoji }} {{ cat.nombre }}</button>
     {% endfor %}
   </div>
+
+  {% if collections.subcategorias.length %}
+  <div class="filtros filtros--sub" role="group" aria-label="Filtrar por subcategoría">
+    <span class="filtros--sub__etiqueta">Por tema:</span>
+    {% for sub in collections.subcategorias %}
+    <button class="filtro filtro--sub" data-filtro="{{ sub.slug }}">{{ sub.nombre }}</button>
+    {% endfor %}
+  </div>
+  {% endif %}
 
   <ul class="lista-entradas">
     {% for entrada in collections.entradas %}
     {% set cat = entrada.data.categoria | categoriaInfo %}
     {% set mad = entrada.data.madurez | madurezInfo %}
-    <li class="lista-entradas__item" data-categoria="{{ cat.slug }}" style="--color-cat: {{ cat.color }};">
+    {% set subSlug = entrada.data.subcategoria | slugSubcategoria %}
+    <li class="lista-entradas__item" data-categoria="{{ cat.slug }}" data-subcategoria="{{ subSlug }}" style="--color-cat: {{ cat.color }};">
       <a href="{{ entrada.url }}">
         <span class="lista-entradas__titulo" style="view-transition-name: titulo-{{ entrada.fileSlug }};">{{ entrada.data.title }}</span>
         <span class="lista-entradas__meta">
           <span class="lista-entradas__categoria">{{ cat.emoji }} {{ cat.nombre }}</span>
+          {% if entrada.data.subcategoria %}
+          <span class="lista-entradas__subcategoria">↳ {{ entrada.data.subcategoria }}</span>
+          {% endif %}
           <span class="lista-entradas__madurez" style="--color-mad: {{ mad.color }};">{{ mad.emoji }} {{ mad.etiqueta }}</span>
           <span class="lista-entradas__fecha">{{ entrada.data.date | fechaCorta }}</span>
         </span>
@@ -37,10 +50,13 @@ permalink: /entradas/
     var botones = document.querySelectorAll(".filtro");
     var items = document.querySelectorAll(".lista-entradas__item");
 
-    function revelar(categoria) {
+    function revelar(filtro) {
       var visibles = 0;
       items.forEach(function (item) {
-        var coincide = categoria === "todas" || item.dataset.categoria === categoria;
+        var coincide =
+          filtro === "todas" ||
+          item.dataset.categoria === filtro ||
+          item.dataset.subcategoria === filtro;
         item.style.display = coincide ? "" : "none";
         item.classList.remove("lista-entradas__item--entra");
         if (coincide) {
@@ -52,26 +68,26 @@ permalink: /entradas/
       });
     }
 
-    function filtrar(categoria, instantaneo) {
+    function filtrar(filtro, instantaneo) {
       botones.forEach(function (b) {
-        b.classList.toggle("filtro--activo", b.dataset.categoria === categoria);
+        b.classList.toggle("filtro--activo", b.dataset.filtro === filtro);
       });
 
       if (instantaneo) {
-        revelar(categoria);
+        revelar(filtro);
         return;
       }
 
       lista.classList.add("lista-entradas--filtrando");
       window.setTimeout(function () {
-        revelar(categoria);
+        revelar(filtro);
         lista.classList.remove("lista-entradas--filtrando");
       }, 150);
     }
 
     botones.forEach(function (boton) {
       boton.addEventListener("click", function () {
-        filtrar(boton.dataset.categoria, false);
+        filtrar(boton.dataset.filtro, false);
       });
     });
 

@@ -1129,6 +1129,23 @@ a:hover {
   border-color: var(--color-cat, var(--acento));
 }
 
+.filtros--sub {
+  margin: -16px 0 28px;
+  align-items: center;
+}
+
+.filtros--sub__etiqueta {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--tinta-suave);
+}
+
+.filtro--sub {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-style: dashed;
+}
+
 .lista-entradas {
   list-style: none;
   margin: 0;
@@ -1181,6 +1198,11 @@ a:hover {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--color-cat, var(--acento));
+}
+
+.lista-entradas__subcategoria {
+  font-style: italic;
+  color: var(--tinta-suave);
 }
 
 /* ---------- Barra de progreso de lectura ---------- */
