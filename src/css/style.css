@@ -420,6 +420,51 @@ a:hover {
   color: var(--tinta);
 }
 
+/* ---------- Sígueme (redes, junto a la suscripción) ---------- */
+.redes-cta {
+  margin: 8px 0 24px;
+  text-align: center;
+}
+
+.redes-cta--destacada {
+  margin: 8px 0 44px;
+}
+
+.redes-cta--entrada {
+  margin: 8px 0 6px;
+  animation: aparecer 0.6s ease-out 0.6s both;
+}
+
+.redes-cta__texto {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  color: var(--tinta-suave);
+}
+
+.redes-cta__iconos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+}
+
+.redes-cta__iconos a {
+  display: inline-flex;
+  color: var(--tinta-suave);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.redes-cta__iconos a:hover {
+  color: var(--acento);
+  transform: translateY(-2px);
+}
+
+.redes-cta__iconos svg {
+  width: 19px;
+  height: 19px;
+}
+
 .sr-solo {
   position: absolute;
   width: 1px;
