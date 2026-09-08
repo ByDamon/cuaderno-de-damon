@@ -1,6 +1,8 @@
 ---
 title: "EL AMOR: LA QUÍMICA DEL ENCUENTRO ❤️"
 categoria: medicina
+subcategoria: Emociones
+madurez: madura
 date: 2026-06-04
 resumen: El amor no es solo una emoción. Es un proceso biológico real que ocurre
   en tu cerebro, con fases, hormonas y hasta "efectos secundarios". Entenderlo
@@ -13,6 +15,14 @@ explicacion: "Cuando una persona se enamora, su cerebro activa un circuito
   neuronales que una
   adicción[](https://dr-lasso.net/2025/02/14/el-amor-esta-en-el-cerebro/)."
 analogia: >-
+  *El amor es como construir un jardín. Al principio, todo es emoción: compras
+  las semillas, las plantas, sueñas con las flores. Hay una explosión de color y
+  energía. Pero con el tiempo, si riegas y cuidas, el jardín no necesita esa
+  euforia inicial. Se vuelve un lugar de calma, de raíces profundas. Si dejas de
+  regarlo, las flores se secan. No porque el jardín fuera falso, sino porque
+  todo lo vivo necesita cuidado.*
+
+
   Las regiones cerebrales clave son:
 
 
@@ -43,7 +53,6 @@ analogia: >-
 
 
   El resultado es una experiencia tan poderosa que puede **cambiar temporalmente nuestra forma de pensar**. Durante el enamoramiento, el cerebro más primitivo inhibe al más racional. Por eso no es el mejor momento para tomar decisiones importantes... pero sí para el autoconocimiento y atreverse a cosas nuevas
-
 
 
   ## Las tres fases del amor (la ciencia lo divide)
