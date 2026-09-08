@@ -34,19 +34,19 @@ analogia: >-
 
   El problema no es tener el índice. El problema es cuando dejas de visitar los estantes que ya conocías de memoria, solo porque el índice está siempre a la mano. **Incluso cuando estás mirando a alguien a los ojos.**
 puente: >-
-  🔵 Azul — Tiempo, universoLa memoria externa es una extensión de nuestra
-  relación con el tiempo. Antes, el tiempo borraba lo que sabíamos. Ahora, la
-  tecnología lo preserva, pero a costa de que dejemos de ejercitarlo. Es como si
-  hubiéramos detenido el tiempo, pero también nos hubiéramos detenido con él.
+  🔵 Azul — La memoria externa es una extensión de nuestra relación con el
+  tiempo. Antes, el tiempo borraba lo que sabíamos. Ahora, la tecnología lo
+  preserva, pero a costa de que dejemos de ejercitarlo. Es como si hubiéramos
+  detenido el tiempo, pero también nos hubiéramos detenido con él.
 
 
-  🟣 Rosa — Cuerpo, cerebroEl cerebro es plástico. Se adapta. Si delegas la memoria, las áreas que la gestionan se reconfiguran. No es que pierdas capacidad, es que la usas para otra cosa: para buscar, para discernir, para navegar. El problema no es biológico. Es de hábitos.
+  🟣 Morado — El cerebro es plástico. Se adapta. Si delegas la memoria, las áreas que la gestionan se reconfiguran. No es que pierdas capacidad, es que la usas para otra cosa: para buscar, para discernir, para navegar. El problema no es biológico. Es de hábitos.
 
 
-  🟡 Verde — Reflexión, filosofíaDelegar memoria no es un invento humano. Las hormigas dejan rastros de feromonas para no tener que recordar el camino de vuelta al hormiguero: el mapa vive afuera, en el ambiente, no en cada cabeza individual. La naturaleza lleva millones de años probando que guardar información fuera del cuerpo puede ser más eficiente que guardarla dentro. No es debilidad. Es estrategia. Nosotros solo le pusimos wifi.
+  🟡 Amarillo — Delegar memoria no es un invento humano. Las hormigas dejan rastros de feromonas para no tener que recordar el camino de vuelta al hormiguero: el mapa vive afuera, en el ambiente, no en cada cabeza individual. La naturaleza lleva millones de años probando que guardar información fuera del cuerpo puede ser más eficiente que guardarla dentro. No es debilidad. Es estrategia. Nosotros solo le pusimos wifi.
 
 
-  🟠 Naranja — Tecnología, historiaCada salto tecnológico genera la misma alarma. La escritura, la imprenta, la máquina de escribir, la calculadora, Google, la IA. Y cada vez, la humanidad sigue adelante. Pero hay una pregunta que nunca respondemos del todo: ¿qué estamos dejando atrás en el camino?
+  🟠 Naranja — Cada salto tecnológico genera la misma alarma. La escritura, la imprenta, la máquina de escribir, la calculadora, Google, la IA. Y cada vez, la humanidad sigue adelante. Pero hay una pregunta que nunca respondemos del todo: ¿qué estamos dejando atrás en el camino?
 relacionadas:
   - el-déjà-vu-cuando-la-memoria-se-adelanta-a-sí-misma-💡
   - el-cerebro-que-se-engaña-a-sí-mismo-🧠
