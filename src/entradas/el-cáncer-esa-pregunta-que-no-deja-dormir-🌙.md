@@ -8,8 +8,8 @@ resumen: El cáncer es como si dentro de tu cuerpo algunas células se volvieran
   miles, cada una con su propia bandera. Por eso no hay un solo ejército que
   pueda detenerlas a todas.
 explicacion: >-
-  El cáncer no es un enemigo con una cara. Es un enemigo con mil caras, y cambia
-  de máscara mientras lo miras.
+  **El cáncer no es un enemigo con una cara. Es un enemigo con mil caras, y
+  cambia de máscara mientras lo miras.**
 
 
   La razón más profunda por la que no existe "la cura" es porque el cáncer no es una enfermedad: es un proceso. Es lo que pasa cuando una célula decide que las reglas del cuerpo no van con ella. Y eso puede pasar por muchas razones distintas: un cigarrillo, un rayo de sol, una mala suerte en la división celular, el simple paso del tiempo. Solo un 5 o 10 por ciento de los cánceres vienen de familia. El resto es el caos de estar vivos.
