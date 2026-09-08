@@ -9,9 +9,10 @@ resumen: "Tus genes son como un libro de recetas que recibiste de tus padres. La
   frigorífico. Y lo mejor: algunas de esas notas se las puedes pasar a tus
   hijos."
 explicacion: >-
-  Durante mucho tiempo creímos que el ADN era un destino escrito. Que nacíamos
-  con un manual cerrado y que nuestro futuro biológico ya estaba decidido. La
-  epigenética llegó a romper esa idea.
+  **Durante mucho tiempo creímos que el ADN era un destino escrito.** 
+
+
+  Que nacíamos con un manual cerrado y que nuestro futuro biológico ya estaba decidido. La epigenética llegó a romper esa idea.
 
 
   La epigenética estudia cómo tu entorno y tus hábitos modifican la forma en que se expresan tus genes, sin cambiar el ADN en sí. Es como si los genes fueran un piano: las teclas son las mismas, pero la música que sale depende de quién las toque y cómo.
