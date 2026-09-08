@@ -40,6 +40,10 @@ titulo: Cuaderno de Damon — Portada
   </p>
 </section>
 
+{% set variante = "mini" %}
+{% set texto = "✒️ Avísame por correo cuando publique algo nuevo" %}
+{% include "partials/suscripcion.njk" %}
+
 <section class="tal-dia" id="tal-dia" hidden aria-live="polite"></section>
 <script id="tal-dia-datos" type="application/json">{{ collections.talDiaComoHoy | json | safe }}</script>
 <script>

@@ -385,6 +385,47 @@ a:hover {
   min-width: 260px;
 }
 
+.suscripcion--mini {
+  margin: 0 0 40px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  column-gap: 10px;
+  row-gap: 4px;
+}
+
+.suscripcion--mini .suscripcion__texto {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+}
+
+.suscripcion--mini .suscripcion__form {
+  gap: 6px;
+}
+
+.suscripcion--mini .suscripcion__form input[type="email"] {
+  min-width: 150px;
+  font-size: 0.85rem;
+  padding: 3px 2px;
+}
+
+.suscripcion--mini .suscripcion__form button {
+  font-size: 0.78rem;
+  padding: 5px 14px;
+}
+
+.suscripcion--mini .suscripcion__mensaje {
+  width: 100%;
+  margin-top: 6px;
+  font-size: 0.82rem;
+}
+
 .suscripcion__texto {
   margin: 0 0 12px;
   font-size: 0.92rem;
