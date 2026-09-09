@@ -32,6 +32,11 @@ layout: layouts/base.njk
   </header>
 
   <div class="hoja__cuerpo">
+    {% set citasInfo = [explicacion, analogia, puente, reflexion] | citas %}
+    {% set explicacion = citasInfo.procesados[0] %}
+    {% set analogia = citasInfo.procesados[1] %}
+    {% set puente = citasInfo.procesados[2] %}
+    {% set reflexion = citasInfo.procesados[3] %}
     {% if explicacion %}
     <section class="seccion seccion--explicacion">
       <h2 class="seccion__titulo">Explicación simple</h2>
@@ -77,6 +82,19 @@ layout: layouts/base.njk
     <section class="reflexion">
       <p class="reflexion__etiqueta">💭 Para seguir pensando</p>
       <div class="reflexion__texto">{{ reflexion | markdown | safe }}</div>
+    </section>
+    {% endif %}
+
+    {% if citasInfo.fuentes.length %}
+    <section class="seccion fuentes" aria-label="Fuentes citadas">
+      <h2 class="seccion__titulo">📚 Fuentes</h2>
+      <ol class="fuentes__lista">
+        {% for fuente in citasInfo.fuentes %}
+        <li id="fuente-{{ fuente.numero }}">
+          <a href="{{ fuente.url }}" target="_blank" rel="noopener noreferrer">{{ fuente.url | hostnameLimpio }}</a>
+        </li>
+        {% endfor %}
+      </ol>
     </section>
     {% endif %}
 

@@ -1587,6 +1587,38 @@ a:hover {
   color: #fbf3e6;
 }
 
+/* Marcadores de cita [1], [2]... dentro del texto de la entrada */
+.hoja__cuerpo a[href^="#fuente-"] {
+  font-size: 0.72em;
+  font-weight: 700;
+  vertical-align: super;
+  text-decoration: none;
+  margin-left: 1px;
+}
+
+.hoja__cuerpo a[href^="#fuente-"]:hover {
+  text-decoration: underline;
+}
+
+.fuentes__lista {
+  padding-left: 1.3em;
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--tinta-suave);
+}
+
+.fuentes__lista li {
+  margin-bottom: 6px;
+}
+
+.fuentes__lista a {
+  word-break: break-word;
+}
+
+.fuentes__lista li:target {
+  color: var(--acento);
+}
+
 /* ---------- Vista previa al pasar el cursor ---------- */
 .vista-previa {
   position: fixed;

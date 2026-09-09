@@ -42,6 +42,32 @@ function buscarMadurez(slug) {
   return MADUREZ[slug] || MADUREZ.madura;
 }
 
+function extraerYNumerarCitas(campos) {
+  const numeroPorUrl = new Map();
+  const fuentes = [];
+  const patronCita = /\[\]\(([^)]+)\)/g;
+
+  function numeroPara(urlCruda) {
+    const url = urlCruda.trim();
+    if (!numeroPorUrl.has(url)) {
+      const numero = fuentes.length + 1;
+      numeroPorUrl.set(url, numero);
+      fuentes.push({ numero, url });
+    }
+    return numeroPorUrl.get(url);
+  }
+
+  const procesados = campos.map((texto) => {
+    if (!texto) return texto;
+    return texto.replace(patronCita, (coincidencia, url) => {
+      const numero = numeroPara(url);
+      return `[[${numero}]](#fuente-${numero})`;
+    });
+  });
+
+  return { procesados, fuentes };
+}
+
 function slugificar(texto) {
   return texto
     .trim()
@@ -79,6 +105,16 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("markdown", (texto) => {
     if (!texto) return "";
     return md.render(texto);
+  });
+
+  eleventyConfig.addFilter("citas", extraerYNumerarCitas);
+
+  eleventyConfig.addFilter("hostnameLimpio", (url) => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch (err) {
+      return url;
+    }
   });
 
   eleventyConfig.addFilter("categoriaInfo", buscarCategoria);
