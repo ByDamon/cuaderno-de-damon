@@ -3,6 +3,7 @@ title: "EL DÉJÀ VU: CUANDO LA MEMORIA SE ADELANTA A SÍ MISMA 💡"
 categoria: medicina
 madurez: madura
 date: 2026-09-06
+sugeridoPor: Frida
 resumen: El déjà vu es como cuando tu cerebro te dice "esto ya lo viviste", pero
   tu cabeza sabe que es la primera vez que estás aquí. Es como un error bonito
   de la memoria, una sensación que dura segundos y luego desaparece.

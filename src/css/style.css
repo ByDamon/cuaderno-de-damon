@@ -1396,6 +1396,20 @@ a:hover {
   font-style: italic;
 }
 
+.hoja__sugerida {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 8px 0 0;
+  padding: 4px 12px;
+  border: 1.3px dashed var(--acento-suave);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--acento);
+}
+
 .hoja__madurez {
   display: inline-flex;
   align-items: center;
@@ -1893,6 +1907,27 @@ a:hover {
 .sugerencia__campo textarea:focus {
   outline: none;
   border-bottom-color: var(--acento);
+}
+
+.sugerencia__campo--casilla {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.sugerencia__campo--casilla input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border-bottom: none;
+  accent-color: var(--acento);
+}
+
+.sugerencia__campo--casilla span {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--tinta-suave);
 }
 
 .sugerencia__enviar {

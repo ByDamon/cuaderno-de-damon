@@ -62,6 +62,11 @@ collections:
         multiple: true
         required: false
         hint: "Elige otras entradas con las que esta se conecta. Alimentan el Mapa de conexiones."
+      - label: "Sugerida por (opcional)"
+        name: "sugeridoPor"
+        widget: "string"
+        required: false
+        hint: 'Si esta entrada nació de una sugerencia en /sugerencia/, pon aquí el nombre de quien la mandó (solo si te dio permiso de mencionarlo). Aparece como una insignia junto al título: "💌 Sugerida por [nombre]".'
       - { label: "Para seguir pensando", name: "reflexion", widget: "text" }
       - { label: "Etiquetas", name: "tags", widget: "list", required: false }
       - {

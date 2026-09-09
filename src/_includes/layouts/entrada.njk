@@ -14,6 +14,9 @@ layout: layouts/base.njk
       <a href="/entradas/?categoria={{ cat.slug }}">{{ cat.emoji }} {{ cat.nombre }}</a>
     </p>
     <h1 class="hoja__titulo" style="view-transition-name: titulo-{{ page.fileSlug }};">{{ title }}</h1>
+    {% if sugeridoPor %}
+    <p class="hoja__sugerida">💌 Sugerida por {{ sugeridoPor }}</p>
+    {% endif %}
     <p class="hoja__fecha">
       {{ date | fechaLarga }} · {{ explicacion | tiempoLectura(analogia, puente, reflexion, content) }}
     </p>
