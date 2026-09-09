@@ -18,6 +18,10 @@ layout: layouts/base.njk
       {{ date | fechaLarga }} · {{ explicacion | tiempoLectura(analogia, puente, reflexion, content) }}
     </p>
     <p class="hoja__madurez" style="--color-mad: {{ mad.color }};">{{ mad.emoji }} {{ mad.etiqueta }}</p>
+    <button type="button" id="boton-compartir" class="hoja__compartir" data-titulo="{{ title }}" data-url="{{ page.url | absoluteUrl(site.url) }}">
+      <span aria-hidden="true">🔗</span> Compartir
+    </button>
+    <p class="hoja__compartir-mensaje" id="compartir-mensaje" aria-live="polite" hidden></p>
     {% if tags %}
     <ul class="hoja__tags">
       {% for tag in tags %}
@@ -97,5 +101,44 @@ layout: layouts/base.njk
     window.addEventListener("scroll", actualizar, { passive: true });
     window.addEventListener("resize", actualizar);
     actualizar();
+  })();
+</script>
+<script>
+  (function () {
+    var boton = document.getElementById("boton-compartir");
+    if (!boton) return;
+    var mensaje = document.getElementById("compartir-mensaje");
+
+    function mostrarMensaje(texto) {
+      if (!mensaje) return;
+      mensaje.textContent = texto;
+      mensaje.hidden = false;
+      clearTimeout(mensaje._temporizador);
+      mensaje._temporizador = setTimeout(function () {
+        mensaje.hidden = true;
+      }, 2500);
+    }
+
+    boton.addEventListener("click", function () {
+      if (typeof enviarEvento === "function") enviarEvento("compartir_entrada");
+
+      var datos = { title: boton.dataset.titulo, url: boton.dataset.url };
+
+      if (navigator.share) {
+        navigator.share(datos).catch(function () {});
+        return;
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+          .writeText(datos.url)
+          .then(function () {
+            mostrarMensaje("🔗 Enlace copiado");
+          })
+          .catch(function () {
+            mostrarMensaje("No se pudo copiar el enlace");
+          });
+      }
+    });
   })();
 </script>

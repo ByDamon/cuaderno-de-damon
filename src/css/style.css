@@ -1415,6 +1415,36 @@ a:hover {
   color: var(--color-mad, var(--tinta-suave));
 }
 
+.hoja__compartir {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0 0 8px;
+  padding: 4px 12px;
+  border: 1.3px dashed var(--acento-suave);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.hoja__compartir:hover {
+  color: var(--acento);
+  border-color: var(--acento);
+  transform: translateY(-1px);
+}
+
+.hoja__compartir-mensaje {
+  width: 100%;
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  color: var(--acento);
+}
+
 .hoja__tags {
   list-style: none;
   display: flex;
