@@ -101,6 +101,24 @@ layout: layouts/base.njk
     </section>
     {% endif %}
 
+    <section class="reacciones" aria-label="Reacciones de los lectores">
+      <p class="reacciones__pregunta">¿Cómo te dejó esta entrada?</p>
+      <div class="reacciones__botones" id="reacciones-botones" data-entrada="{{ page.fileSlug }}">
+        <button type="button" class="reaccion" data-emoji="mente">
+          <span class="reaccion__emoji" aria-hidden="true">🤯</span>
+          <span class="reaccion__conteo" data-conteo="mente">0</span>
+        </button>
+        <button type="button" class="reaccion" data-emoji="sorpresa">
+          <span class="reaccion__emoji" aria-hidden="true">😮</span>
+          <span class="reaccion__conteo" data-conteo="sorpresa">0</span>
+        </button>
+        <button type="button" class="reaccion" data-emoji="amor">
+          <span class="reaccion__emoji" aria-hidden="true">🖤</span>
+          <span class="reaccion__conteo" data-conteo="amor">0</span>
+        </button>
+      </div>
+    </section>
+
     {% set variante = "entrada" %}
     {% include "partials/suscripcion.njk" %}
     {% set variante = "entrada" %}
@@ -160,6 +178,74 @@ layout: layouts/base.njk
             mostrarMensaje("No se pudo copiar el enlace");
           });
       }
+    });
+  })();
+</script>
+<script>
+  (function () {
+    var contenedor = document.getElementById("reacciones-botones");
+    if (!contenedor) return;
+
+    var entrada = contenedor.dataset.entrada;
+    var claveVoto = "reaccion-" + entrada;
+    var botones = contenedor.querySelectorAll(".reaccion");
+
+    function pintar(conteos) {
+      botones.forEach(function (boton) {
+        var emoji = boton.dataset.emoji;
+        var span = boton.querySelector("[data-conteo]");
+        span.textContent = (conteos && conteos[emoji]) || 0;
+      });
+    }
+
+    function marcarElegido(emoji) {
+      botones.forEach(function (boton) {
+        boton.classList.toggle("reaccion--elegido", boton.dataset.emoji === emoji);
+        boton.disabled = true;
+      });
+    }
+
+    fetch("/.netlify/functions/reacciones?entrada=" + encodeURIComponent(entrada))
+      .then(function (respuesta) {
+        return respuesta.json();
+      })
+      .then(function (datos) {
+        if (datos && datos.ok) pintar(datos.conteos);
+      })
+      .catch(function () {});
+
+    var yaVotado;
+    try {
+      yaVotado = localStorage.getItem(claveVoto);
+    } catch (err) {
+      yaVotado = null;
+    }
+    if (yaVotado) marcarElegido(yaVotado);
+
+    botones.forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        if (boton.disabled) return;
+        var emoji = boton.dataset.emoji;
+
+        marcarElegido(emoji);
+        try {
+          localStorage.setItem(claveVoto, emoji);
+        } catch (err) {}
+        if (typeof enviarEvento === "function") enviarEvento("reaccion_entrada", { emoji: emoji });
+
+        fetch("/.netlify/functions/reacciones", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ entrada: entrada, emoji: emoji }),
+        })
+          .then(function (respuesta) {
+            return respuesta.json();
+          })
+          .then(function (datos) {
+            if (datos && datos.ok) pintar(datos.conteos);
+          })
+          .catch(function () {});
+      });
     });
   })();
 </script>

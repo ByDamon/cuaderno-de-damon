@@ -1633,6 +1633,62 @@ a:hover {
   color: var(--acento);
 }
 
+.reacciones {
+  margin: 8px 0 30px;
+  text-align: center;
+}
+
+.reacciones__pregunta {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+}
+
+.reacciones__botones {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.reaccion {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: inherit;
+  padding: 8px 16px;
+  border: 1.3px dashed var(--acento-suave);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.reaccion:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--acento);
+}
+
+.reaccion:disabled {
+  cursor: default;
+}
+
+.reaccion--elegido {
+  border-style: solid;
+  border-color: var(--acento);
+  background: var(--color-cat-suave, var(--papel-oscuro));
+}
+
+.reaccion__emoji {
+  font-size: 1.2rem;
+}
+
+.reaccion__conteo {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  min-width: 1em;
+}
+
 /* ---------- Vista previa al pasar el cursor ---------- */
 .vista-previa {
   position: fixed;
