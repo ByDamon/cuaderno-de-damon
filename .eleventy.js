@@ -85,6 +85,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/admin");
   eleventyConfig.addPassthroughCopy("src/js");
+  eleventyConfig.addPassthroughCopy("src/favicon.svg");
+  eleventyConfig.addPassthroughCopy("src/favicon-32.png");
+  eleventyConfig.addPassthroughCopy("src/favicon-16.png");
+  eleventyConfig.addPassthroughCopy("src/favicon-180-apple-touch-icon.png");
 
   eleventyConfig.addFilter("dateToIso", (fecha) => {
     return DateTime.fromJSDate(fecha, { zone: "utc" }).toISODate();
