@@ -52,24 +52,38 @@ function construirCorreoHtml({ item, sitioUrl, enlaceBaja }) {
 }
 
 async function enviarUno({ apiKey, remitente, destinatario, asunto, html }) {
-  const respuesta = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: remitente,
-      to: [destinatario],
-      subject: asunto,
-      html,
-    }),
-  });
+  try {
+    const respuesta = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: remitente,
+        to: [destinatario],
+        subject: asunto,
+        html,
+      }),
+    });
 
-  if (!respuesta.ok) {
-    const texto = await respuesta.text();
-    console.error(`Error enviando a ${destinatario}:`, respuesta.status, texto);
+    if (!respuesta.ok) {
+      const texto = await respuesta.text();
+      console.error(`Error enviando a ${destinatario}:`, respuesta.status, texto);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error(`Excepción enviando a ${destinatario}:`, err);
+    return false;
   }
+}
+
+function responder(cuerpo, status = 200) {
+  return new Response(JSON.stringify(cuerpo), {
+    status,
+    headers: { "content-type": "application/json" },
+  });
 }
 
 export default async () => {
@@ -78,7 +92,7 @@ export default async () => {
   const sitioUrl = process.env.URL || "https://cuadernodedamon.com";
 
   if (!apiKey || !remitente) {
-    return new Response("ok");
+    return responder({ ok: false, motivo: "Falta configurar RESEND_API_KEY o CORREO_REMITENTE" });
   }
 
   let xml;
@@ -88,7 +102,7 @@ export default async () => {
     xml = await respuestaFeed.text();
   } catch (err) {
     console.error("No se pudo leer el feed:", err);
-    return new Response("ok");
+    return responder({ ok: false, motivo: "No se pudo leer /feed.xml", detalle: String(err) });
   }
 
   const items = extraerItems(xml);
@@ -103,37 +117,56 @@ export default async () => {
   // vieja, solo marca todo como "ya visto" y arranca a avisar desde aquí.
   if (!yaNotificadas.length && items.length) {
     await storeEstado.setJSON("guids", items.map((item) => item.guid));
-    return new Response("ok");
+    return responder({ ok: true, motivo: "Primera vez que corre: marcó todo lo existente como visto, sin enviar nada", entradasEnFeed: items.length });
   }
 
   if (!nuevas.length) {
-    return new Response("ok");
+    return responder({ ok: true, motivo: "No hay entradas nuevas por notificar", entradasEnFeed: items.length });
   }
 
   const storeSuscriptores = getStore("suscriptores");
   const suscriptores = (await storeSuscriptores.get("lista", { type: "json" })) || [];
 
+  // Solo se marca una entrada como "ya notificada" si el correo llegó a TODOS
+  // los suscriptores. Si alguno falla, la entrada se reintenta sola en el
+  // siguiente ciclo (cada 30 min) en vez de perderse en silencio para siempre.
+  const exitosas = [];
+
   if (suscriptores.length) {
     for (const item of nuevas.reverse()) {
+      let todosOk = true;
+
       for (const correo of suscriptores) {
         const enlaceBaja = `${sitioUrl}/.netlify/functions/desuscribir?correo=${encodeURIComponent(correo)}`;
         const html = construirCorreoHtml({ item, sitioUrl, enlaceBaja });
 
-        await enviarUno({
+        const ok = await enviarUno({
           apiKey,
           remitente,
           destinatario: correo,
           asunto: `📖 Nueva entrada: ${item.titulo}`,
           html,
         });
+
+        if (!ok) todosOk = false;
       }
+
+      if (todosOk) exitosas.push(item.guid);
     }
+  } else {
+    exitosas.push(...nuevas.map((n) => n.guid));
   }
 
-  const actualizadas = Array.from(new Set([...yaNotificadas, ...nuevas.map((n) => n.guid)]));
+  const actualizadas = Array.from(new Set([...yaNotificadas, ...exitosas]));
   await storeEstado.setJSON("guids", actualizadas);
 
-  return new Response("ok");
+  return responder({
+    ok: true,
+    entradasNuevas: nuevas.length,
+    entradasEnviadasOk: exitosas.length,
+    entradasPendientesDeReintento: nuevas.length - exitosas.length,
+    suscriptores: suscriptores.length,
+  });
 };
 
 export const config = {
