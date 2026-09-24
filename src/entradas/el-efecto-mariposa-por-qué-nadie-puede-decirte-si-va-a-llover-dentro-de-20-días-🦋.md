@@ -19,7 +19,7 @@ explicacion: >-
   mirando.** 
 
 
-  Lorenz acababa de tropezar, sin buscarlo, con el caos determinista: sistemas sin una sola gota de azar cada paso sigue estrictamente del anterior pero imposibles de predecir a largo plazo, porque cualquier diferencia diminuta en el punto de partida se duplica, y se vuelve a duplicar, hasta tragarse el pronóstico entero. En la atmósfera real, ese error se duplica cada dos o tres días. **Por eso, durante más de medio siglo, el techo aceptado rondó las dos semanas.** 
+  Lorenz acababa de tropezar, sin buscarlo, con el caos determinista: sistemas sin una sola gota de azar, cada paso sigue estrictamente del anterior, pero imposibles de predecir a largo plazo, porque cualquier diferencia diminuta en el punto de partida se duplica, y se vuelve a duplicar, hasta tragarse el pronóstico entero. En la atmósfera real, ese error se duplica cada dos o tres días. **Por eso, durante más de medio siglo, el techo aceptado rondó las dos semanas.** 
 
 
   Y aquí está el giro que casi nadie cuenta: ese techo, hace apenas un par de años, empezó a moverse. En 2024, investigadores de la Universidad de Washington usaron un modelo de inteligencia artificial para hacer algo tramposo pero revelador: tomaron el clima real que ya había ocurrido y, mirando hacia atrás, calcularon cuál habría sido la condición inicial perfecta para predecirlo. Con esa condición "hecha trampa", el modelo mantuvo pronósticos útiles más allá de los 30 días, en promedio, sobre cientos de casos. **El techo de dos semanas no era, después de todo, una ley física absoluta.** Era, en buena parte, el límite de lo bien que conocíamos el punto de partida.
