@@ -6,7 +6,11 @@
   {% set metaTitulo = titulo or title or site.titulo %}
   {% set metaDescripcion = descripcion or resumen or site.descripcion %}
   {% set urlAbsoluta = page.url | absoluteUrl(site.url) %}
-  {% set imagenOg = "/img/og/og-default.png" | absoluteUrl(site.url) %}
+  {% if categoria %}
+    {% set imagenOg = page.fileSlug | ogImagen | absoluteUrl(site.url) %}
+  {% else %}
+    {% set imagenOg = "/img/og/og-default.png" | absoluteUrl(site.url) %}
+  {% endif %}
 
   <title>{{ metaTitulo }}</title>
   <meta name="description" content="{{ metaDescripcion }}">

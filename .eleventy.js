@@ -1,9 +1,13 @@
 const { DateTime } = require("luxon");
 const MarkdownIt = require("markdown-it");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
+const path = require("path");
 const categorias = require("./src/_data/categorias.js");
+const { generarImagenesOg, slugOg } = require("./lib/og-imagenes");
 
 const md = new MarkdownIt({ html: false, breaks: false });
+
+let entradasParaOg = [];
 
 function contarPalabras(texto) {
   if (!texto) return 0;
@@ -121,6 +125,8 @@ module.exports = function (eleventyConfig) {
     }
   });
 
+  eleventyConfig.addFilter("ogImagen", (fileSlug) => `/img/og/${slugOg(fileSlug)}.png`);
+
   eleventyConfig.addFilter("categoriaInfo", buscarCategoria);
 
   eleventyConfig.addFilter("madurezInfo", buscarMadurez);
@@ -189,9 +195,24 @@ module.exports = function (eleventyConfig) {
   ]);
 
   eleventyConfig.addCollection("entradas", (collectionApi) => {
-    return collectionApi.getFilteredByGlob("src/entradas/*.md").sort((a, b) => {
+    const lista = collectionApi.getFilteredByGlob("src/entradas/*.md").sort((a, b) => {
       return b.date - a.date;
     });
+    entradasParaOg = lista;
+    return lista;
+  });
+
+  eleventyConfig.on("eleventy.after", async ({ dir }) => {
+    try {
+      await generarImagenesOg({
+        entradas: entradasParaOg,
+        categorias,
+        carpetaSalida: path.join(dir.output, "img", "og"),
+        imagenPorDefecto: path.join(dir.input, "img", "og", "og-default.png"),
+      });
+    } catch (err) {
+      console.error("[og] Falló la generación de imágenes por entrada:", err);
+    }
   });
 
   eleventyConfig.addCollection("subcategorias", (collectionApi) => {
