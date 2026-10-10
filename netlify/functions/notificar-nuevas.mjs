@@ -131,7 +131,7 @@ async function ejecutar(registro) {
 
   // Solo se marca una entrada como "ya notificada" si el correo llegó a TODOS
   // los suscriptores. Si alguno falla, la entrada se reintenta sola en el
-  // siguiente ciclo (cada 30 min) en vez de perderse en silencio para siempre.
+  // siguiente ciclo (cada 10 min) en vez de perderse en silencio para siempre.
   const exitosas = [];
 
   if (suscriptores.length) {
@@ -200,5 +200,5 @@ export default async () => {
 };
 
 export const config = {
-  schedule: "*/30 * * * *",
+  schedule: "*/10 * * * *",
 };

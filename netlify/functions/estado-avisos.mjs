@@ -1,11 +1,5 @@
 import { getStore } from "@netlify/blobs";
 
-function enmascarar(correo) {
-  const [usuario, dominio] = String(correo || "").split("@");
-  if (!dominio) return "***";
-  return `${usuario.slice(0, 1)}***@${dominio}`;
-}
-
 function extraerGuidsYTitulos(xml) {
   return xml
     .split("<item>")
@@ -51,8 +45,6 @@ export default async () => {
       pendientesDeAvisar: items.filter((i) => !yaNotificadas.has(i.guid)).map((i) => i.titulo),
     };
 
-    const suscriptores = (await getStore("suscriptores").get("lista", { type: "json" })) || [];
-    informe.suscriptores = suscriptores.length;
   } catch (err) {
     informe.errorLeyendoEstado = String(err);
   }
@@ -66,17 +58,22 @@ export default async () => {
         : dominios.cuerpo,
     };
 
-    const envios = await consultarResend("/emails?limit=10", apiKey);
+    // Solo agregados por asunto: sin destinatarios ni conteo de suscriptores,
+    // porque esta página es pública.
+    const envios = await consultarResend("/emails?limit=50", apiKey);
+    const porAsunto = new Map();
+    if (Array.isArray(envios.cuerpo?.data)) {
+      for (const e of envios.cuerpo.data) {
+        const grupo = porAsunto.get(e.subject) || { asunto: e.subject, primerEnvio: e.created_at, estados: {} };
+        grupo.estados[e.last_event] = (grupo.estados[e.last_event] || 0) + 1;
+        if (e.created_at < grupo.primerEnvio) grupo.primerEnvio = e.created_at;
+        porAsunto.set(e.subject, grupo);
+      }
+    }
     informe.resendUltimosEnvios = {
       status: envios.status,
-      envios: Array.isArray(envios.cuerpo?.data)
-        ? envios.cuerpo.data.map((e) => ({
-            para: (e.to || []).map(enmascarar),
-            asunto: e.subject,
-            estado: e.last_event,
-            creado: e.created_at,
-          }))
-        : envios.cuerpo,
+      porAsunto: Array.from(porAsunto.values()),
+      detalleError: Array.isArray(envios.cuerpo?.data) ? undefined : envios.cuerpo,
     };
   }
 
