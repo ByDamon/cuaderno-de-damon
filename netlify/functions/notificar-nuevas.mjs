@@ -51,7 +51,7 @@ function construirCorreoHtml({ item, sitioUrl, enlaceBaja }) {
   `.trim();
 }
 
-async function enviarUno({ apiKey, remitente, destinatario, asunto, html }) {
+async function enviarUno({ apiKey, remitente, destinatario, asunto, html, registro }) {
   try {
     const respuesta = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -70,11 +70,13 @@ async function enviarUno({ apiKey, remitente, destinatario, asunto, html }) {
     if (!respuesta.ok) {
       const texto = await respuesta.text();
       console.error(`Error enviando a ${destinatario}:`, respuesta.status, texto);
+      registro.errores.push({ status: respuesta.status, detalle: texto.slice(0, 300) });
       return false;
     }
     return true;
   } catch (err) {
     console.error(`Excepción enviando a ${destinatario}:`, err);
+    registro.errores.push({ detalle: String(err).slice(0, 300) });
     return false;
   }
 }
@@ -86,7 +88,7 @@ function responder(cuerpo, status = 200) {
   });
 }
 
-export default async () => {
+async function ejecutar(registro) {
   const apiKey = process.env.RESEND_API_KEY;
   const remitente = process.env.CORREO_REMITENTE;
   const sitioUrl = process.env.URL || "https://cuadernodedamon.com";
@@ -146,6 +148,7 @@ export default async () => {
           destinatario: correo,
           asunto: `📖 Nueva entrada: ${item.titulo}`,
           html,
+          registro,
         });
 
         if (!ok) todosOk = false;
@@ -167,6 +170,33 @@ export default async () => {
     entradasPendientesDeReintento: nuevas.length - exitosas.length,
     suscriptores: suscriptores.length,
   });
+}
+
+// Deja constancia de cada corrida (hora, resultado y errores de Resend) para
+// poder diagnosticar desde /.netlify/functions/estado-avisos sin abrir los logs.
+export default async () => {
+  const registro = { errores: [] };
+  let respuesta;
+
+  try {
+    respuesta = await ejecutar(registro);
+  } catch (err) {
+    console.error("Falló la corrida de avisos:", err);
+    registro.errores.push({ detalle: String(err).slice(0, 300) });
+    respuesta = responder({ ok: false, motivo: "Error no controlado" }, 500);
+  }
+
+  try {
+    await getStore("estado-notificaciones").setJSON("ultima-corrida", {
+      fecha: new Date().toISOString(),
+      resultado: await respuesta.clone().json(),
+      errores: registro.errores.slice(0, 5),
+    });
+  } catch (err) {
+    console.error("No se pudo guardar el registro de la corrida:", err);
+  }
+
+  return respuesta;
 };
 
 export const config = {
